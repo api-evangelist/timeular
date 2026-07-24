@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities Current Tracking API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Current Tracking
+paths:
+  /api/v4/tracking:
+    get:
+      summary: Show current Tracking
+      operationId: showCurrentTracking
+      tags:
+      - Current Tracking
+      responses:
+        '200':
+          description: Current Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: There is no current Tracking
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    patch:
+      summary: Edit Tracking
+      operationId: editTracking
+      tags:
+      - Current Tracking
+      description: 'With this endpoint you can set/edit/remove the note of your current Tracking.
+
+        To remove the note set it to null/empty/blank. You can provide one or more Tags and Mentions in a note, each of them prefixed with # or @. If the related activity is bound to some Integration, let’s say a JIRA Project, JIRA task IDs are valid Mentions too.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              note:
+                text: 99 sheep <{{|t|1|}}> <{{|m|1|}}>
+              activityId: '1'
+              startedAt: '2016-02-03T04:00:00.000'
+      responses:
+        '200':
+          description: Edited current Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '409':
+          description: There is no Tracking or Tracking for another Activity is ongoing
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: ActivityId Not Found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Cancel Tracking
+      operationId: cancelTracking
+      tags:
+      - Current Tracking
+      description: With this endpoint you can cancel your current Tracking. New Time Entry won't be created.
+      responses:
+        '200':
+          description: Cancelled current Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tracking/{id}/start:
+    post:
+      summary: Start Tracking
+      operationId: startTracking
+      tags:
+      - Current Tracking
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              startedAt: '2016-02-03T04:00:00.000'
+      responses:
+        '200':
+          description: Started Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '409':
+          description: Tracking is already started
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tracking/stop:
+    post:
+      summary: Stop Tracking
+      operationId: stopTracking
+      tags:
+      - Current Tracking
+      description: 'With this endpoint you can create a new Time Entry by stopping the current tracking. The resulting Time Entry should have a duration no shorter than 1 minute.
+
+        The time entry will be created even if it overlaps with other Time Entries – in result existing Time Entries will be split or deleted in such manner, that the new one will fit without overlapping.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              stoppedAt: '2016-02-03T05:00:00.000'
+      responses:
+        '200':
+          description: Created Time Entry
+          content:
+            application/json:
+              example:
+                id: '34714420'
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                duration:
+                  startedAt: '2020-02-03T04:00:00.000'
+                  stoppedAt: '2020-08-03T05:00:00.000'
+                note:
+                  text: null
+                  tags: []
+                  mentions: []
+                errors:
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType toggl'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType toggl'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType harvest'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType harvest'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType toggl'''
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '409':
+          description: Tracking is not started
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

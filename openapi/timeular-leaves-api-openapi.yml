@@ -1,0 +1,304 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities Leaves API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Leaves
+paths:
+  /api/v4/leaves:
+    get:
+      summary: List all Leaves
+      operationId: listAllLeaves
+      tags:
+      - Leaves
+      description: With this endpoint you can list all your Leaves. If you are Admin or Owner you can list Leaves of all your Team members or just one of them using userId param.
+      responses:
+        '200':
+          description: List of Leaves
+          content:
+            application/json:
+              example:
+                timeLeaves:
+                - id: '1'
+                  typeId: '11'
+                  startDate: '2025-02-17T00:00:00.000'
+                  endDate: '2025-02-28T23:59:59.999'
+                  note: null
+                  status: approved
+                  user:
+                    id: '1'
+                    name: My name
+                    email: my-name@example.com
+                - id: '2'
+                  typeId: '12'
+                  startDate: '2025-03-05T09:00:00.000'
+                  endDate: '2025-03-05T13:00:00.000'
+                  note: I don't feel like working
+                  status: denied
+                  user:
+                    id: '1'
+                    name: My name
+                    email: my-name@example.com
+                - id: '3'
+                  typeId: '9'
+                  startDate: '2025-03-27T00:00:00.000'
+                  endDate: '2025-03-27T23:59:59.999'
+                  note: null
+                  status: pending
+                  user:
+                    id: '2'
+                    name: My teammate
+                    email: my-teammate@example.com
+        '404':
+          description: User Not Found
+          content:
+            application/json:
+              example:
+                error:
+                  message: User not found
+    post:
+      summary: Create a Leave
+      operationId: createALeave
+      tags:
+      - Leaves
+      description: 'Create a Leave for yourself. If the Leave exceeds working hours for that day, it will be expanded into a full-day leave.
+
+        To create a Leave on behalf of a Team member use Create a Leave for User endpoint instead.
+
+        typeId, startDate and endDate fields are required.
+
+        note field is optional.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              typeId: '1'
+              startDate: '2025-01-01T06:00:00.000'
+              endDate: '2025-01-01T20:00:00.000'
+              note: Time to relax
+      responses:
+        '200':
+          description: Created Leave
+          content:
+            application/json:
+              example:
+                id: '1'
+                typeId: '1'
+                startDate: '2025-01-01T00:00:00.000'
+                endDate: '2025-01-01T23:59:59.999'
+                note: Time to relax
+                status: pending
+                user:
+                  id: '1'
+                  name: My name
+                  email: my-name@example.com
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/leaves/types:
+    get:
+      summary: List all Leave Types
+      operationId: listAllLeaveTypes
+      tags:
+      - Leaves
+      description: With this endpoint you can list Leave types. Other Leave requests use typeId to indicate their type.
+      responses:
+        '200':
+          description: List of Leave Types
+          content:
+            application/json:
+              example:
+                types:
+                - id: '1'
+                  name: Paid Leave
+                - id: '2'
+                  name: Sick Leave
+                - id: '3'
+                  name: Unpaid Leave
+                - id: '4'
+                  name: Public Holiday
+                - id: '5'
+                  name: Company Holiday
+                - id: '6'
+                  name: Sabbatical Leave
+                - id: '7'
+                  name: Bereavement Leave
+                - id: '8'
+                  name: Duvet Day
+                - id: '9'
+                  name: Gardening Leave
+                - id: '10'
+                  name: Time Off in Lieu
+                - id: '11'
+                  name: Carryover
+                - id: '12'
+                  name: Parental Leave
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/users/{id}/leaves:
+    post:
+      summary: Create a Leave for User
+      operationId: createALeaveForUser
+      tags:
+      - Leaves
+      description: 'Create an approved Leave on behalf of a Team member. Requires Admin or Owner role.
+
+        If the Leave exceeds Team member''s working hours for that day, it will be expanded into a full-day leave.
+
+        typeId, startDate and endDate fields are required.
+
+        note field is optional.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              typeId: '1'
+              startDate: '2025-01-01T06:00:00.000'
+              endDate: '2025-01-01T20:00:00.000'
+              note: Extra day off
+      responses:
+        '200':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/leaves/{id}/approve:
+    post:
+      summary: Approve a Leave
+      operationId: approveALeave
+      tags:
+      - Leaves
+      description: 'Approve a Leave of Team member. Requires Admin or Owner role.
+
+        Future Leave can be approved regardless of its status, so it''s possible to change status of a future Leave from denied to approved using this endpoint. Only pending past Leave can be approved.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Approved Leave
+          content:
+            application/json:
+              example:
+                id: '1'
+                typeId: '1'
+                startDate: '2025-01-01T00:00:00.000'
+                endDate: '2025-01-01T23:59:59.999'
+                note: null
+                status: approved
+                user:
+                  id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only pending time leaves can be approved in the past
+  /api/v4/leaves/{id}/deny:
+    post:
+      summary: Deny a Leave
+      operationId: denyALeave
+      tags:
+      - Leaves
+      description: 'Deny a Leave of Team member. Requires Admin or Owner role.
+
+        Future Leave can be denied regardless of its status, so it''s possible to change status of a future Leave from approved to denied using this endpoint. Only pending past Leave can be denied.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Denied Leave
+          content:
+            application/json:
+              example:
+                id: '1'
+                typeId: '1'
+                startDate: '2025-01-01T00:00:00.000'
+                endDate: '2025-01-01T23:59:59.999'
+                note: null
+                status: denied
+                user:
+                  id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only pending time leaves can be denied in the past
+  /api/v4/leaves/{id}:
+    delete:
+      summary: Delete a Leave
+      operationId: deleteALeave
+      tags:
+      - Leaves
+      description: 'Delete a Leave. If it''s a Leave of another Team member, action requires Admin or Owner role.
+
+        This is an irreversible action. If you want to deny a Leave use Deny a Leave endpoint instead.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                message: success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

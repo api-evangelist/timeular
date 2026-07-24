@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities Members API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Members
+paths:
+  /api/v4/folders/{id}/members:
+    get:
+      summary: List all Folder Members
+      operationId: listAllFolderMembers
+      tags:
+      - Members
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of Folder Members
+          content:
+            application/json:
+              example:
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                - id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+                  accessLevel: personal
+                retiredMembers:
+                - id: '3'
+                  name: My old teammate
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    post:
+      summary: Add Member to Folder
+      operationId: addMemberToFolder
+      tags:
+      - Members
+      description: 'With this endpoint you can add a new Member to an existing Folder. You should identify new Member by email and set their access level to "full" or "personal".
+
+        Team members with a subscription seat are immediately added to Folder.
+
+        Users without a subscription seat or without a EARLY account receive an invitation email and their "id" in response body has value "pending". They will appear with a Guest badge in the Members list.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: my-teammate@example.com
+              accessLevel: personal
+      responses:
+        '200':
+          description: Invited Member
+          content:
+            application/json:
+              example:
+                id: pending
+                name: ''
+                email: guest@example.com
+                accessLevel: personal
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: No Subscription Seat
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only users with a seat can be directly added to folders. Assign user a seat or invite them to the folder through the app instead.
+  /api/v4/folders/{id}/members/{id}:
+    get:
+      summary: Find Folder Member by their ID
+      operationId: findFolderMemberByTheirId
+      tags:
+      - Members
+      description: 'An endpoint to show information about Folder Member.
+
+        You can use GET users endpoint to find IDs of all of your team members.
+
+        Access level is "full" or "personal". Full access members can do things like create and edit activities and tags within a Folder. Personal access members are able to track time entries using the activities and tags that the Full access members have created. Learn more about access levels.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Found Member
+          content:
+            application/json:
+              example:
+                id: '2'
+                name: My teammate
+                email: my-teammate@example.com
+                accessLevel: personal
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Remove Member from Folder
+      operationId: removeMemberFromFolder
+      tags:
+      - Members
+      description: With this endpoint you can remove a Member from Folder. Member who was removed from Folder will be returned in retiredMembers response field in Folder endpoints. Removing a Member can take a few minutes.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              example:
+                message: pending
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

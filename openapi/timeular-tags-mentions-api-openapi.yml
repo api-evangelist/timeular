@@ -1,0 +1,292 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities Tags & Mentions API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Tags & Mentions
+paths:
+  /api/v4/tags-and-mentions:
+    get:
+      summary: Fetch Tags & Mentions
+      operationId: fetchTagsMentions
+      tags:
+      - Tags & Mentions
+      description: Fetches all Tags and Mentions, including from third party integrations, such as JIRA, Toggl etc.
+      responses:
+        '200':
+          description: List of Tags and Mentions
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tags:
+    post:
+      summary: Create Tag
+      operationId: createTag
+      tags:
+      - Tags & Mentions
+      description: Creates a Tag within the given Folder and scope (timeular is default).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              key: tagtagtag
+              label: my new tag
+              scope: timeular
+              folderId: '1'
+      responses:
+        '200':
+          description: Create Tag
+          content:
+            application/json:
+              example:
+                id: 1
+                key: tagtagtag
+                label: my new tag
+                scope: timeular
+                folderId: '1'
+        '404':
+          description: Folder Not Found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tags/{id}:
+    patch:
+      summary: Update Tag
+      operationId: updateTag
+      tags:
+      - Tags & Mentions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              label: New Label for tag
+      responses:
+        '200':
+          description: Updated Tag
+          content:
+            application/json:
+              example:
+                id: 1
+                key: 44f8feac-da6f-4e08-8a84-0cc5181d32d7
+                label: New Label for tag
+                scope: timeular
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Delete Tag
+      operationId: deleteTag
+      tags:
+      - Tags & Mentions
+      description: Deletes the given tag, returning the list of timeEntries, which were edited by this operation, as well as if the currentTracking was edited by deleting the tag.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                timeEntryIds:
+                - 1234
+                trackingEdited: null
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/mentions:
+    post:
+      summary: Create Mention
+      operationId: createMention
+      tags:
+      - Tags & Mentions
+      description: Creates a Mention within the given Folder and scope (timeular is default).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              key: mention
+              label: my new mention
+              scope: timeular
+              folderId: '1'
+      responses:
+        '200':
+          description: Created Mention
+          content:
+            application/json:
+              example:
+                id: 1
+                key: mention
+                label: my new mention
+                scope: timeular
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Folder not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/mentions/{id}:
+    patch:
+      summary: Update Mention
+      operationId: updateMention
+      tags:
+      - Tags & Mentions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              label: My new mention label
+      responses:
+        '200':
+          description: Updated Mention
+          content:
+            application/json:
+              example:
+                id: 1
+                key: mention
+                label: My new mention label
+                scope: timeular
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Delete Mention
+      operationId: deleteMention
+      tags:
+      - Tags & Mentions
+      description: Deletes the given mention, returning the list of timeEntries, which were edited by this operation, as well as if the currentTracking was edited by deleting the mention.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                timeEntryIds:
+                - 1234
+                trackingEdited: null
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

@@ -1,0 +1,221 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Activities
+paths:
+  /api/v4/activities:
+    get:
+      summary: List all Activities
+      operationId: listAllActivities
+      tags:
+      - Activities
+      responses:
+        '200':
+          description: List of Activities
+          content:
+            application/json:
+              example:
+                activities:
+                - id: '1'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                inactiveActivities:
+                - id: '2'
+                  name: def
+                  color: '#000000'
+                  folderId: '2'
+                archivedActivities:
+                - id: '3'
+                  name: ghi
+                  color: '#000000'
+                  folderId: '2'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    post:
+      summary: Create an Activity
+      operationId: createAnActivity
+      tags:
+      - Activities
+      description: With this endpoint you can create a new Activity. It should have a name, a folder and a color. The name doesn’t have to be unique.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: sleeping
+              color: '#a1c2c3'
+              folderId: '123456'
+      responses:
+        '201':
+          description: Created Activity
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: sleeping
+                color: '#a1b2c3'
+                folderId: '1'
+        '403':
+          description: Not Folder Admin
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only folder admins are allowed to create activities
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/activities/{id}:
+    patch:
+      summary: Edit an Activity
+      operationId: editAnActivity
+      tags:
+      - Activities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: deeper sleeping
+              color: '#f9e8d7'
+      responses:
+        '200':
+          description: Edited Activity
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: deeper sleeping
+                color: '#f9e8d7'
+                folderId: '1'
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Archive an Activity
+      operationId: archiveAnActivity
+      tags:
+      - Activities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                errors:
+                - Any error which can be ignored and did not prevented action to be performed successfully.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/activities/{id}/unarchive:
+    post:
+      summary: Unarchive an Activity
+      operationId: unarchiveAnActivity
+      tags:
+      - Activities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Activity Unarchived
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: abc
+                color: '#000000'
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

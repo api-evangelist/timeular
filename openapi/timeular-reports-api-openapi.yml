@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities Reports API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Reports
+paths:
+  /api/v4/report:
+    post:
+      summary: Generate Report
+      operationId: generateReport
+      tags:
+      - Reports
+      description: 'Generates a report which contains all the Time Entries from inside the given time range. If some Time Entry exceeds the report’s time range, only the matching part will be included.
+
+        Only Members with Full access can see Time Entries of other Members of a Folder.
+
+        Due to midnight delay  Members with Full access are able to see all time entries created up until midnight in the time entry creator''s time zone. You always see your own time entries without delay.
+
+        Warning: For file type "xlsx" or "csv" you need a pro subscription!
+
+        There are 2 mandatory fields:
+
+
+        date
+
+
+        start - "YYYY-MM-DD", (e.g. 2024-07-01)
+
+
+        end - "YYYY-MM-DD", (e.g. 2024-07-31)
+
+
+
+
+        fileType ("json", "xlsx" or "csv" )
+
+
+
+        And optional fields that allow you to filter the results:
+
+
+        activities
+
+
+        ids (e.g. ["1", "2"])
+
+
+        status ("active" or "archived")
+
+
+
+
+        users
+
+
+        ids (e.g. ["1", "2"])
+
+
+
+        folders
+
+
+        ids (e.g. ["1", "2"])
+
+
+        status ("active" or "archived")
+
+
+
+
+        tags
+
+
+        ids (e.g. [1, 2])
+
+
+
+        mentions
+
+
+        ids (e.g. [1, 2])
+
+
+
+        operator ("AND" or "OR") - show Time Entries matching all ("AND") or any ("OR") provided Tags and Mentions, defaults to "OR"
+
+
+        noteQuery (e.g. "text")'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              date:
+                start: '2017-02-01'
+                end: '2017-02-28'
+              fileType: json
+              activities:
+                ids:
+                - '1'
+                status: active
+              users:
+                ids:
+                - '1'
+              folders:
+                ids:
+                - '1'
+              tags:
+                ids:
+                - 1
+              mentions:
+                ids:
+                - 1
+              operator: OR
+              noteQuery: text
+      responses:
+        '200':
+          description: Report in CSV format
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

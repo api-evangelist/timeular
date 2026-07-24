@@ -1,0 +1,147 @@
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public Activities Webhooks API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Webhooks
+paths:
+  /api/v4/webhooks/event:
+    get:
+      summary: List available events
+      operationId: listAvailableEvents
+      tags:
+      - Webhooks
+      description: Returns a list of events, which can be subscribed to.
+      responses:
+        '200':
+          description: List of Events
+          content:
+            application/json:
+              example:
+                events:
+                - timeEntryCreated
+                - timeEntryUpdated
+                - timeEntryDeleted
+                - trackingStarted
+                - trackingStopped
+                - trackingEdited
+                - trackingCanceled
+                - activityCreated
+                - activityUpdated
+                - activityDeleted
+                - folderCreated
+                - folderUpdated
+                - folderDeleted
+                - timeLeaveCreated
+                - timeLeaveUpdated
+                - timeLeaveDeleted
+                - timeLeaveApproved
+                - timeLeaveDenied
+  /api/v4/webhooks/subscription:
+    post:
+      summary: Subscribe
+      operationId: subscribe
+      tags:
+      - Webhooks
+      description: 'Creates a webhook subscription for the given event. That means that if the event happens (e.g. a time entry is created), the given target url will be called with the payload of the event.
+
+        The URL needs to be a valid, publicly reachable, HTTPS URL.
+
+        The webhook has a timeout of 10 seconds, so if it takes longer to call the given URL, it will fail.
+
+        If the given target URL returns a 410 GONE error, this webhook subscription will automatically be unsubscribed.
+
+        See the Webhooks description for further information about the payloads.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              event: trackingStarted
+              target_url: https://example.org/some-endpoint
+      responses:
+        '200':
+          description: Subscription ID
+          content:
+            application/json:
+              example:
+                id: '123456'
+        '400':
+          description: Maximum Number of Subscriptions per Event
+          content:
+            application/json:
+              example:
+                message: maximum subscriptions per event exceeded
+                status: 400 Bad Request
+    get:
+      summary: List Subscriptions
+      operationId: listSubscriptions
+      tags:
+      - Webhooks
+      description: Lists all webhook subscriptions for the current user.
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              example:
+                subscriptions:
+                - id: '123456'
+                  event: trackingStarted
+                  target_url: https://example.org/some-endpoint
+    delete:
+      summary: Unsubscribe all for User
+      operationId: unsubscribeAllForUser
+      tags:
+      - Webhooks
+      description: Removes all webhooks subscriptions for the current user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                message: success
+  /api/v4/webhooks/subscription/{id}:
+    delete:
+      summary: Unsubscribe
+      operationId: unsubscribe
+      tags:
+      - Webhooks
+      description: Removes a webhook subscription by id.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Unsubscribe
+          content:
+            application/json:
+              example:
+                message: success
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              example:
+                message: could not find subscription with id 123456
+                status: 404 Not Found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.
