@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/timeular-early-openapi.yml + https://developers.early.app/
+summary: >-
+  Cross-cutting standards conformance for the EARLY (Timeular) Public API, derived
+  from the OpenAPI and public documentation. This asserts technical standards only;
+  it is not a claim about a published compliance program.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: Auth is API Key + API Secret exchanged for a Bearer token; no OAuth2 authorization-server flow.
+- id: oidc
+  conforms: false
+- id: bearer-token-http
+  conforms: true
+  evidence: Secured endpoints use Authorization Bearer with an Access Token.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors are plain application/json with HTTP status codes; no application/problem+json media type observed.
+- id: webhooks
+  conforms: true
+  evidence: Documented webhook subscription API with 18 event types (webhooks/timeular-early-webhooks.yml).
+- id: rest-json
+  conforms: true
+  evidence: Resource-oriented JSON REST over HTTPS with standard verbs (GET/POST/PATCH/DELETE).
+- id: uri-path-versioning
+  conforms: true
+  evidence: Major version carried in the URI path (/api/v4/).
+- id: cursor-pagination
+  conforms: false
+  evidence: Range-based querying by timestamp; no cursor/offset pagination envelope.
+- id: idempotency-key
+  conforms: false
+  evidence: No client-supplied idempotency key documented.

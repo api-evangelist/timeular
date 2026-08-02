@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for EARLY (Timeular) Public API
+  version: 1.0.0
+extends: openapi/timeular-early-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-source: https://developers.early.app/ (public Postman collection T1DwdEke)
+    x-api-brand-note: Timeular rebranded to EARLY; API host is api.early.app.
+- target: $.info
+  update:
+    x-artifacts:
+      authentication: authentication/timeular-authentication.yml
+      webhooks: webhooks/timeular-early-webhooks.yml
+      asyncapi: asyncapi/timeular-early-asyncapi.yml
+      conventions: conventions/timeular-conventions.yml
+      errors: errors/timeular-problem-types.yml
+      lifecycle: lifecycle/timeular-lifecycle.yml
+      data_model: data-model/timeular-data-model.yml
+- target: $.servers
+  update:
+    - url: https://api.early.app/api/v3
+      description: Production (V3 - available)
+    - url: https://api.early.app/api/v2
+      description: Production (V2 - available)

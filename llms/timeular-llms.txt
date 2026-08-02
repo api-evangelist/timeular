@@ -1,0 +1,30 @@
+# EARLY (Timeular)
+
+> EARLY (formerly Timeular) is a time-tracking product for individuals and teams. Its public REST API at api.early.app manages activities, live tracking, time entries, reports, tags and mentions, folders, users, leave, and webhook subscriptions. Authentication uses an API Key and API Secret exchanged for a Bearer Access Token. V4 is the current version.
+
+## APIs
+- [EARLY (Timeular) Public API — Developer Portal](https://developers.early.app/): REST API docs, published as a public Postman collection.
+- Base URL: https://api.early.app/api/v4
+
+## Specs
+- [OpenAPI (derived)](openapi/timeular-early-openapi.yml): 52 V4 operations derived from the public Postman collection.
+- [Postman collection (verbatim)](postman/timeular-early-postman.json): the provider-published public collection (V4/V3/V2).
+- [AsyncAPI — webhooks](asyncapi/timeular-early-asyncapi.yml): 18 webhook event types.
+
+## Artifacts
+- [Authentication](authentication/timeular-authentication.yml): API Key + Secret -> Bearer token.
+- [Webhooks](webhooks/timeular-early-webhooks.yml): event list + subscription API.
+- [Conventions](conventions/timeular-conventions.yml): versioning, pagination, error semantics.
+- [Error catalog](errors/timeular-problem-types.yml): HTTP status semantics.
+- [Lifecycle](lifecycle/timeular-lifecycle.yml): URI-path versioning (v4 current; v3, v2).
+- [Data model](data-model/timeular-data-model.yml): entity-relationship graph.
+- [Conformance](conformance/timeular-conformance.yml): cross-cutting standards.
+- [MCP server (candidate)](mcp/timeular-mcp.yml): derived tool list.
+
+## Docs
+- [Developer Portal](https://developers.early.app/)
+- [Pricing](https://early.app/pricing/)
+- [Support](https://support.early.app/en/)
+- [Blog](https://early.app/blog/)
+- [Sign up](https://product.early.app/register)
+- [Privacy Policy](https://early.app/privacy-policy/)

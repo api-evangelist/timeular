@@ -1,0 +1,82 @@
+# generated: 2026-07-21
+# method: derived
+# source: https://developers.early.app/ (public Postman collection T1DwdEke, Webhooks folder)
+asyncapi: 2.6.0
+info:
+  title: EARLY (Timeular) Webhooks
+  version: v4
+  description: >-
+    Event surface derived from the EARLY (Timeular) public webhook API. Consumers
+    subscribe a publicly reachable HTTPS target URL to a named event via
+    POST /api/v4/webhooks/subscription; EARLY delivers the event payload to that
+    URL over HTTPS POST with a 10 second timeout. A 410 GONE response auto-unsubscribes.
+defaultContentType: application/json
+servers:
+  production:
+    url: api.early.app
+    protocol: https
+    description: Webhook subscriptions are managed under https://api.early.app/api/v4/webhooks
+channels:
+  timeEntry:
+    description: Time entry lifecycle events delivered to the subscriber target URL.
+    subscribe:
+      message:
+        oneOf:
+        - $ref: '#/components/messages/timeEntryCreated'
+        - $ref: '#/components/messages/timeEntryUpdated'
+        - $ref: '#/components/messages/timeEntryDeleted'
+  tracking:
+    description: Live tracking events.
+    subscribe:
+      message:
+        oneOf:
+        - $ref: '#/components/messages/trackingStarted'
+        - $ref: '#/components/messages/trackingStopped'
+        - $ref: '#/components/messages/trackingEdited'
+        - $ref: '#/components/messages/trackingCanceled'
+  activity:
+    description: Activity lifecycle events.
+    subscribe:
+      message:
+        oneOf:
+        - $ref: '#/components/messages/activityCreated'
+        - $ref: '#/components/messages/activityUpdated'
+        - $ref: '#/components/messages/activityDeleted'
+  folder:
+    description: Folder lifecycle events.
+    subscribe:
+      message:
+        oneOf:
+        - $ref: '#/components/messages/folderCreated'
+        - $ref: '#/components/messages/folderUpdated'
+        - $ref: '#/components/messages/folderDeleted'
+  timeLeave:
+    description: Leave lifecycle and approval events.
+    subscribe:
+      message:
+        oneOf:
+        - $ref: '#/components/messages/timeLeaveCreated'
+        - $ref: '#/components/messages/timeLeaveUpdated'
+        - $ref: '#/components/messages/timeLeaveDeleted'
+        - $ref: '#/components/messages/timeLeaveApproved'
+        - $ref: '#/components/messages/timeLeaveDenied'
+components:
+  messages:
+    timeEntryCreated: {name: timeEntryCreated, title: Time entry created}
+    timeEntryUpdated: {name: timeEntryUpdated, title: Time entry updated}
+    timeEntryDeleted: {name: timeEntryDeleted, title: Time entry deleted}
+    trackingStarted: {name: trackingStarted, title: Tracking started}
+    trackingStopped: {name: trackingStopped, title: Tracking stopped}
+    trackingEdited: {name: trackingEdited, title: Tracking edited}
+    trackingCanceled: {name: trackingCanceled, title: Tracking canceled}
+    activityCreated: {name: activityCreated, title: Activity created}
+    activityUpdated: {name: activityUpdated, title: Activity updated}
+    activityDeleted: {name: activityDeleted, title: Activity deleted}
+    folderCreated: {name: folderCreated, title: Folder created}
+    folderUpdated: {name: folderUpdated, title: Folder updated}
+    folderDeleted: {name: folderDeleted, title: Folder deleted}
+    timeLeaveCreated: {name: timeLeaveCreated, title: Leave created}
+    timeLeaveUpdated: {name: timeLeaveUpdated, title: Leave updated}
+    timeLeaveDeleted: {name: timeLeaveDeleted, title: Leave deleted}
+    timeLeaveApproved: {name: timeLeaveApproved, title: Leave approved}
+    timeLeaveDenied: {name: timeLeaveDenied, title: Leave denied}

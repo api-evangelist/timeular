@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/timeular-early-openapi.yml + https://developers.early.app/ (Authentication folder)
+summary:
+  types:
+  - http
+  model: api-key-and-secret-exchanged-for-bearer-token
+  detail: >-
+    EARLY (Timeular) authenticates in two steps. First POST your API Key and API
+    Secret to /api/v4/developer/sign-in to obtain a short-lived Access Token. Then
+    send that token as `Authorization: Bearer <token>` on all secured endpoints.
+    API Key & Secret are generated in the EARLY web app (product.early.app), or via
+    POST /api/v4/developer/api-access when you already hold a token.
+sign_in:
+  operationId: signInWithApiKeyApiSecret
+  method: POST
+  path: '/api/v4/developer/sign-in'
+  request:
+    apiKey: string
+    apiSecret: string
+  returns: Access Token (Bearer)
+key_management:
+  fetch_api_key:
+    operationId: fetchApiKey
+    method: GET
+    path: '/api/v4/developer/api-access'
+  generate_api_key:
+    operationId: generateNewApiKeyApiSecret
+    method: POST
+    path: '/api/v4/developer/api-access'
+  logout:
+    operationId: logout
+    method: POST
+    path: '/api/v4/developer/logout'
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.
+  sources:
+  - openapi/timeular-early-openapi.yml

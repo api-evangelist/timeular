@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/timeular-early-openapi.yml
+summary: >-
+  No official hosted/remote MCP server was found for EARLY (Timeular). This is a
+  candidate tool list derived one-to-one from the documented V4 REST operations, to
+  seed an MCP server that wraps the EARLY Public API.
+server:
+  name: timeular-early
+  transport: http
+  url: null
+tools:
+- name: list_activities
+  description: List all activities
+  source_operation: openapi/timeular-early-openapi.yml#listAllActivities
+- name: create_activity
+  description: Create an activity
+  source_operation: openapi/timeular-early-openapi.yml#createAnActivity
+- name: show_current_tracking
+  description: Show the current live tracking
+  source_operation: openapi/timeular-early-openapi.yml#showCurrentTracking
+- name: start_tracking
+  description: Start tracking an activity
+  source_operation: openapi/timeular-early-openapi.yml#startTracking
+- name: stop_tracking
+  description: Stop the current tracking
+  source_operation: openapi/timeular-early-openapi.yml#stopTracking
+- name: find_time_entries
+  description: Find time entries in a given date range
+  source_operation: openapi/timeular-early-openapi.yml#findTimeEntriesInGivenRange
+- name: create_time_entry
+  description: Create a time entry
+  source_operation: openapi/timeular-early-openapi.yml#createTimeEntry
+- name: edit_time_entry
+  description: Edit a time entry
+  source_operation: openapi/timeular-early-openapi.yml#editATimeEntry
+- name: generate_report
+  description: Generate a time report
+  source_operation: openapi/timeular-early-openapi.yml#generateReport
+- name: fetch_tags_and_mentions
+  description: Fetch tags and mentions
+  source_operation: openapi/timeular-early-openapi.yml#fetchTagsMentions
+- name: list_folders
+  description: List all folders
+  source_operation: openapi/timeular-early-openapi.yml#listAllFolders
+- name: list_users
+  description: List all users
+  source_operation: openapi/timeular-early-openapi.yml#listAllUsers
+- name: list_leaves
+  description: List all leaves
+  source_operation: openapi/timeular-early-openapi.yml#listAllLeaves
+- name: subscribe_webhook
+  description: Subscribe a target URL to a webhook event
+  source_operation: openapi/timeular-early-openapi.yml#subscribe

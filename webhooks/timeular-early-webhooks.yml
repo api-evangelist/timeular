@@ -1,0 +1,56 @@
+generated: '2026-07-21'
+method: searched
+source: https://developers.early.app/ (public Postman collection T1DwdEke, Webhooks folder)
+service: EARLY (Timeular) Public API webhooks
+summary: >-
+  EARLY exposes a webhook subscription API. Subscribe a publicly reachable HTTPS
+  target URL to a named event; when the event fires the target is called with the
+  event payload. Webhooks have a 10 second timeout. If the target returns HTTP
+  410 GONE the subscription is automatically unsubscribed.
+management:
+  list_events:
+    method: GET
+    path: '/api/v4/webhooks/event'
+    operationId: listAvailableEvents
+  subscribe:
+    method: POST
+    path: '/api/v4/webhooks/subscription'
+    operationId: subscribe
+  list_subscriptions:
+    method: GET
+    path: '/api/v4/webhooks/subscription'
+    operationId: listSubscriptions
+  unsubscribe:
+    method: DELETE
+    path: '/api/v4/webhooks/subscription/{id}'
+    operationId: unsubscribe
+  unsubscribe_all:
+    method: DELETE
+    path: '/api/v4/webhooks/subscription'
+    operationId: unsubscribeAllForUser
+subscribe_request:
+  event: string
+  target_url: string
+delivery:
+  transport: https-post
+  timeout_seconds: 10
+  auto_unsubscribe_on: 410 GONE
+events:
+- timeEntryCreated
+- timeEntryUpdated
+- timeEntryDeleted
+- trackingStarted
+- trackingStopped
+- trackingEdited
+- trackingCanceled
+- activityCreated
+- activityUpdated
+- activityDeleted
+- folderCreated
+- folderUpdated
+- folderDeleted
+- timeLeaveCreated
+- timeLeaveUpdated
+- timeLeaveDeleted
+- timeLeaveApproved
+- timeLeaveDenied

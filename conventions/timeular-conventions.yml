@@ -1,0 +1,48 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/timeular-early-openapi.yml + https://developers.early.app/
+summary: >-
+  Cross-cutting request/response conventions for the EARLY (Timeular) Public API,
+  derived from the OpenAPI and the provider's public Postman documentation.
+authentication:
+  style: bearer-token
+  detail: >-
+    Obtain an Access Token by POSTing your API Key and API Secret to
+    /api/v4/developer/sign-in, then send it as `Authorization: Bearer <token>`
+    on all secured endpoints. API Key & Secret are generated in the EARLY web app
+    (product.early.app). See authentication/timeular-authentication.yml.
+versioning:
+  scheme: uri-path
+  current: v4
+  available: [v4, v3, v2]
+  detail: The major version is a path segment, e.g. /api/v4/. V4 is current; V3 and V2 remain available.
+  cross_ref: lifecycle/timeular-lifecycle.yml
+idempotency:
+  supported: false
+  detail: >-
+    The public API does not document a client-supplied idempotency key. Mutations
+    are addressed by resource id (PATCH/DELETE /activities/{id}, /time-entries/{id},
+    etc.), and creation endpoints are not idempotent. State-changing actions such as
+    start/stop tracking use dedicated sub-resource routes (/tracking/{id}/start,
+    /tracking/stop).
+pagination:
+  style: date-range
+  detail: >-
+    Time entries and reports are queried by an explicit start/end timestamp range in
+    the path, e.g. GET /api/v4/time-entries/{start}/{end}. Leaves accept `start` and
+    `end` query parameters. There is no documented cursor/offset pagination envelope.
+  timestamp_format: 'ISO-8601 without offset, e.g. 2016-01-01T00:00:00.000'
+timezones:
+  detail: Report generation accepts a `timezone` parameter (e.g. Europe/Warsaw) in V2/V3.
+error_envelope:
+  detail: >-
+    Errors return standard HTTP status codes (400, 401, 403, 404, 409, 500) with a
+    JSON body. See errors/timeular-problem-types.yml.
+  cross_ref: errors/timeular-problem-types.yml
+rate_limiting:
+  detail: No public rate-limit headers or documented quotas were found in the API documentation.
+webhooks:
+  detail: >-
+    HTTPS POST callbacks with a 10s timeout; a 410 GONE response auto-unsubscribes.
+    See webhooks/timeular-early-webhooks.yml.
+  cross_ref: webhooks/timeular-early-webhooks.yml

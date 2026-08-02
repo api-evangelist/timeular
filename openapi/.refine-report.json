@@ -1,0 +1,34 @@
+{
+  "provider": "timeular",
+  "sources": [
+    "timeular-activities-api-openapi.yml",
+    "timeular-authentication-api-openapi.yml",
+    "timeular-current-tracking-api-openapi.yml",
+    "timeular-folders-api-openapi.yml",
+    "timeular-leaves-api-openapi.yml",
+    "timeular-members-api-openapi.yml",
+    "timeular-reports-api-openapi.yml",
+    "timeular-tags-mentions-api-openapi.yml",
+    "timeular-time-entries-api-openapi.yml",
+    "timeular-users-api-openapi.yml",
+    "timeular-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "timeular-activities-api-openapi.yml",
+    "timeular-authentication-api-openapi.yml",
+    "timeular-current-tracking-api-openapi.yml",
+    "timeular-folders-api-openapi.yml",
+    "timeular-leaves-api-openapi.yml",
+    "timeular-members-api-openapi.yml",
+    "timeular-reports-api-openapi.yml",
+    "timeular-tags-mentions-api-openapi.yml",
+    "timeular-time-entries-api-openapi.yml",
+    "timeular-users-api-openapi.yml",
+    "timeular-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,2283 @@
+# generated: 2026-07-21
+# method: derived
+# source: https://developers.early.app/ (public Postman collection T1DwdEke)
+openapi: 3.0.3
+info:
+  title: EARLY (Timeular) Public API
+  version: v4
+  description: Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking,
+    tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged
+    for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.
+  contact:
+    name: EARLY Developer Support
+    url: https://developers.early.app/
+  x-derived-from: https://developers.early.app/ public Postman collection T1DwdEke
+servers:
+- url: https://api.early.app/api/v4
+  description: Production (V4 - current)
+security:
+- bearerAuth: []
+tags:
+- name: Activities
+- name: Authentication
+- name: Current Tracking
+- name: Folders
+- name: Leaves
+- name: Members
+- name: Reports
+- name: Tags & Mentions
+- name: Time Entries
+- name: Users
+- name: Webhooks
+paths:
+  /api/v4/developer/sign-in:
+    post:
+      summary: Sign-in with API Key & API Secret
+      operationId: signInWithApiKeyApiSecret
+      tags:
+      - Authentication
+      description: 'With this endpoint you can obtain an Access Token, which is required to access secured endpoints. To do
+        so, you have to provide both an API Key and an API Secret.
+
+        They can be generated on https://product.early.app or, if you have an Access Token already, with a POST request to
+        /developer/api-access.
+
+        If you have an Access Token, you need to set the Authorization Header in every secured request to Bearer your_access_token.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              apiKey: '{{API_KEY}}'
+              apiSecret: '{{API_SECRET}}'
+      responses:
+        '200':
+          description: Access Token
+          content:
+            application/json:
+              example:
+                token: 1234abcdEFGH
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+      security: []
+  /api/v4/developer/api-access:
+    get:
+      summary: Fetch API Key
+      operationId: fetchApiKey
+      tags:
+      - Authentication
+      description: "With this endpoint you can fetch your API Key. If you haven't generated one yet, null will be returned.\n\
+        \ You cannot obtain an API Secret in this way, since it’s visible only once right after generation. If you have lost\
+        \ your API Secret, please generate a new pair of API Key &amp; API Secret."
+      responses:
+        '200':
+          description: API Key
+          content:
+            application/json:
+              example:
+                apiKey: ABCDefgh1234=
+        '400':
+          description: Missing Authorization header
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+    post:
+      summary: Generate new API Key & API Secret
+      operationId: generateNewApiKeyApiSecret
+      tags:
+      - Authentication
+      description: 'With this endpoint you can generate a new pair of API Key &amp; API Secret.
+
+        Every time you generate a new pair, the old one becomes invalid. Your API Secret won’t be accessible later, so please
+        note it down in some secret place. If you have lost your API Secret, you can generate a new pair of API Key &amp;
+        API Secret here.'
+      responses:
+        '200':
+          description: API Key & API Secret
+          content:
+            application/json:
+              example:
+                apiKey: ABCDefgh1234=
+                apiSecret: EFGHijkl5678=
+        '400':
+          description: Missing Authorization header
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+  /api/v4/developer/logout:
+    post:
+      summary: Logout
+      operationId: logout
+      tags:
+      - Authentication
+      description: With this endpoint you are invalidating the current Access Token meaning all access wil be denied if you
+        are using it afterwards again.
+      responses:
+        '200':
+          description: API Key & API Secret
+          content:
+            application/json:
+              example:
+                apiKey: ABCDefgh1234=
+                apiSecret: EFGHijkl5678=
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+        '400':
+          description: Missing Authorization header
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+  /api/v4/activities:
+    get:
+      summary: List all Activities
+      operationId: listAllActivities
+      tags:
+      - Activities
+      responses:
+        '200':
+          description: List of Activities
+          content:
+            application/json:
+              example:
+                activities:
+                - id: '1'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                inactiveActivities:
+                - id: '2'
+                  name: def
+                  color: '#000000'
+                  folderId: '2'
+                archivedActivities:
+                - id: '3'
+                  name: ghi
+                  color: '#000000'
+                  folderId: '2'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    post:
+      summary: Create an Activity
+      operationId: createAnActivity
+      tags:
+      - Activities
+      description: With this endpoint you can create a new Activity. It should have a name, a folder and a color. The name
+        doesn’t have to be unique.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: sleeping
+              color: '#a1c2c3'
+              folderId: '123456'
+      responses:
+        '201':
+          description: Created Activity
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: sleeping
+                color: '#a1b2c3'
+                folderId: '1'
+        '403':
+          description: Not Folder Admin
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only folder admins are allowed to create activities
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/activities/{id}:
+    patch:
+      summary: Edit an Activity
+      operationId: editAnActivity
+      tags:
+      - Activities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: deeper sleeping
+              color: '#f9e8d7'
+      responses:
+        '200':
+          description: Edited Activity
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: deeper sleeping
+                color: '#f9e8d7'
+                folderId: '1'
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Archive an Activity
+      operationId: archiveAnActivity
+      tags:
+      - Activities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                errors:
+                - Any error which can be ignored and did not prevented action to be performed successfully.
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/activities/{id}/unarchive:
+    post:
+      summary: Unarchive an Activity
+      operationId: unarchiveAnActivity
+      tags:
+      - Activities
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Activity Unarchived
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: abc
+                color: '#000000'
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tracking:
+    get:
+      summary: Show current Tracking
+      operationId: showCurrentTracking
+      tags:
+      - Current Tracking
+      responses:
+        '200':
+          description: Current Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: There is no current Tracking
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    patch:
+      summary: Edit Tracking
+      operationId: editTracking
+      tags:
+      - Current Tracking
+      description: 'With this endpoint you can set/edit/remove the note of your current Tracking.
+
+        To remove the note set it to null/empty/blank. You can provide one or more Tags and Mentions in a note, each of them
+        prefixed with # or @. If the related activity is bound to some Integration, let’s say a JIRA Project, JIRA task IDs
+        are valid Mentions too.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              note:
+                text: 99 sheep <{{|t|1|}}> <{{|m|1|}}>
+              activityId: '1'
+              startedAt: '2016-02-03T04:00:00.000'
+      responses:
+        '200':
+          description: Edited current Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '409':
+          description: There is no Tracking or Tracking for another Activity is ongoing
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: ActivityId Not Found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Cancel Tracking
+      operationId: cancelTracking
+      tags:
+      - Current Tracking
+      description: With this endpoint you can cancel your current Tracking. New Time Entry won't be created.
+      responses:
+        '200':
+          description: Cancelled current Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tracking/{id}/start:
+    post:
+      summary: Start Tracking
+      operationId: startTracking
+      tags:
+      - Current Tracking
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              startedAt: '2016-02-03T04:00:00.000'
+      responses:
+        '200':
+          description: Started Tracking
+          content:
+            application/json:
+              example:
+                id: 1
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                startedAt: '2020-08-03T04:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|2|}}>
+                  tags:
+                  - id: 1
+                    key: 3b381b24-c690-4000-9079-7355579162fb
+                    label: some tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 2
+                    key: 2b381b24-c690-4000-9079-7355579162fb
+                    label: some-mention
+                    scope: timeular
+                    folderId: '1'
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '409':
+          description: Tracking is already started
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tracking/stop:
+    post:
+      summary: Stop Tracking
+      operationId: stopTracking
+      tags:
+      - Current Tracking
+      description: 'With this endpoint you can create a new Time Entry by stopping the current tracking. The resulting Time
+        Entry should have a duration no shorter than 1 minute.
+
+        The time entry will be created even if it overlaps with other Time Entries – in result existing Time Entries will
+        be split or deleted in such manner, that the new one will fit without overlapping.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              stoppedAt: '2016-02-03T05:00:00.000'
+      responses:
+        '200':
+          description: Created Time Entry
+          content:
+            application/json:
+              example:
+                id: '34714420'
+                activity:
+                  id: '1217348'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                duration:
+                  startedAt: '2020-02-03T04:00:00.000'
+                  stoppedAt: '2020-08-03T05:00:00.000'
+                note:
+                  text: null
+                  tags: []
+                  mentions: []
+                errors:
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType
+                  toggl'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType
+                  toggl'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType
+                  harvest'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType
+                  harvest'''
+                - 'Third Party Service error: status code = 400, message = ''no integration found for 111525 and integrationType
+                  toggl'''
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '409':
+          description: Tracking is not started
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/time-entries/{timestamp}/{timestamp}:
+    get:
+      summary: Find Time Entries in given range
+      operationId: findTimeEntriesInGivenRange
+      tags:
+      - Time Entries
+      description: Find Time Entries within the given time range.
+      parameters:
+      - name: timestamp
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: timestamp
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                timeEntries:
+                - id: '1'
+                  activity:
+                    id: '1'
+                    name: abc
+                    color: '#000000'
+                    folderId: '1'
+                  duration:
+                    startedAt: '2020-01-01T00:00:00.000'
+                    stoppedAt: '2020-01-01T01:00:00.000'
+                  note:
+                    text: If there is a possibility of several things going wrong, the one that will cause the most damage
+                      will be the one to go wrong <{{|t|2|}}><{{|t|1|}}><{{|m|1|}}><{{|m|2|}}>
+                    tags:
+                    - id: 1
+                      key: 43d10bff-65c6-4aab-879e-8e4b9106c99d
+                      label: burst
+                      scope: timeular
+                      folderId: '1'
+                    - id: 2
+                      key: 849ab930-4492-4b73-b378-8bff6d12fdd0
+                      label: interpret
+                      scope: timeular
+                      folderId: '1'
+                    mentions:
+                    - id: 1
+                      key: 8ed8ca39-813b-4f9d-a1ba-9a18b6c001e0
+                      label: Joanie
+                      scope: timeular
+                      folderId: '1'
+                    - id: 2
+                      key: 999f14a2-c0d2-430a-b1c0-23495f96b1cb
+                      label: Violette
+                      scope: timeular
+                      folderId: '1'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/time-entries:
+    post:
+      summary: Create Time Entry
+      operationId: createTimeEntry
+      tags:
+      - Time Entries
+      description: 'With this endpoint, you can create a new Time Entry. It should be connected to an Activity and have a
+        duration no shorter than 1 minute. A Note can be provided too, but it’s not required. Within this Note, you can refer
+        one or more Tags or Mentions.
+
+        These Tags and Mentions need to be referenced by their ID and put inside a special prefix and suffix, &lt;{{|t|1|}}&gt;
+        for the tag with id 1 and &lt;{{|m|1|}}&gt; for the mention with id 1.
+
+        If the related Activity is bound to some Integration, let’s say a JIRA Project, JIRA task IDs is a valid Mention.
+        The Time Entry will be created even if it overlaps with other Time Entries – in result existing Time Entries will
+        be split or deleted in such manner, that new one will fit without overlapping.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              activityId: '1'
+              startedAt: '2016-08-05T06:00:00.000'
+              stoppedAt: '2016-08-05T07:00:00.000'
+              note:
+                text: 99 sheep <{{|t|1|}}> <{{|m|1|}}>
+      responses:
+        '201':
+          description: Created Time Entry
+          content:
+            application/json:
+              example:
+                id: '1'
+                activity:
+                  id: '1'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                duration:
+                  startedAt: '2016-08-05T06:00:00.000'
+                  stoppedAt: '2016-08-05T07:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|1|}}>
+                  tags:
+                  - id: 1
+                    key: dabf59bc-9997-44ca-9451-e753a11090c4
+                    label: some-tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 1
+                    key: debf59bc-9997-44ca-9451-e753a11090c4
+                    label: some mention
+                    scope: timeular
+                    folderId: '1'
+                errors: []
+        '500':
+          description: Integration-related error, eg. if new Time Entry somehow conflicts with data on the Integration side
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Activity not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/time-entries/{id}:
+    get:
+      summary: Find Time Entry by its ID
+      operationId: findTimeEntryByItsId
+      tags:
+      - Time Entries
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Found Time Entry
+          content:
+            application/json:
+              example:
+                id: '3'
+                activity:
+                  id: '1'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                duration:
+                  startedAt: '2016-08-05T06:00:00.000'
+                  stoppedAt: '2016-08-05T07:00:00.000'
+                note:
+                  text: 99 sheep <{{|t|1|}}><{{|m|1|}}>
+                  tags:
+                  - id: 1
+                    key: dabf59bc-9997-44ca-9451-e753a11090c4
+                    label: some-tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 1
+                    key: debf59bc-9997-44ca-9451-e753a11090c4
+                    label: some mention
+                    scope: timeular
+                    folderId: '1'
+                errors: []
+        '404':
+          description: Time Entry not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    patch:
+      summary: Edit a Time Entry
+      operationId: editATimeEntry
+      tags:
+      - Time Entries
+      description: 'With this endpoint you can edit an existing time entry. When changing the activity ID please note, that
+        both the new and old activity attached to time entry have to belong to same integration.
+
+        To remove a note, just set the complete object to null and all values within the object will be deleted too.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              activityId: '1'
+              startedAt: '2016-08-05T06:01:00.000'
+              stoppedAt: '2016-08-05T07:01:00.000'
+              note:
+                text: 200 sheep <{{|t|1|}}> <{{|m|1|}}>
+      responses:
+        '200':
+          description: Edited Time Entry
+          content:
+            application/json:
+              example:
+                id: '1'
+                activity:
+                  id: '1'
+                  name: abc
+                  color: '#000000'
+                  folderId: '1'
+                duration:
+                  startedAt: '2016-08-05T06:00:00.000'
+                  stoppedAt: '2016-08-05T07:00:00.000'
+                note:
+                  text: 200 sheep <{{|t|1|}}><{{|m|1|}}>
+                  tags:
+                  - id: 1
+                    key: dabf59bc-9997-44ca-9451-e753a11090c4
+                    label: some-tag
+                    scope: timeular
+                    folderId: '1'
+                  mentions:
+                  - id: 1
+                    key: debf59bc-9997-44ca-9451-e753a11090c4
+                    label: some mention
+                    scope: timeular
+                    folderId: '1'
+                errors: []
+        '404':
+          description: Activity or Time Entry not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '500':
+          description: Integration-related error, eg. if given integration does not exist
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Delete a Time Entry
+      operationId: deleteATimeEntry
+      tags:
+      - Time Entries
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                errors:
+                - Any error which can be ignored and did not prevented action to be performed successfully.
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Time Entry not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/report:
+    post:
+      summary: Generate Report
+      operationId: generateReport
+      tags:
+      - Reports
+      description: 'Generates a report which contains all the Time Entries from inside the given time range. If some Time
+        Entry exceeds the report’s time range, only the matching part will be included.
+
+        Only Members with Full access can see Time Entries of other Members of a Folder.
+
+        Due to midnight delay  Members with Full access are able to see all time entries created up until midnight in the
+        time entry creator''s time zone. You always see your own time entries without delay.
+
+        Warning: For file type "xlsx" or "csv" you need a pro subscription!
+
+        There are 2 mandatory fields:
+
+
+        date
+
+
+        start - "YYYY-MM-DD", (e.g. 2024-07-01)
+
+
+        end - "YYYY-MM-DD", (e.g. 2024-07-31)
+
+
+
+
+        fileType ("json", "xlsx" or "csv" )
+
+
+
+        And optional fields that allow you to filter the results:
+
+
+        activities
+
+
+        ids (e.g. ["1", "2"])
+
+
+        status ("active" or "archived")
+
+
+
+
+        users
+
+
+        ids (e.g. ["1", "2"])
+
+
+
+        folders
+
+
+        ids (e.g. ["1", "2"])
+
+
+        status ("active" or "archived")
+
+
+
+
+        tags
+
+
+        ids (e.g. [1, 2])
+
+
+
+        mentions
+
+
+        ids (e.g. [1, 2])
+
+
+
+        operator ("AND" or "OR") - show Time Entries matching all ("AND") or any ("OR") provided Tags and Mentions, defaults
+        to "OR"
+
+
+        noteQuery (e.g. "text")'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              date:
+                start: '2017-02-01'
+                end: '2017-02-28'
+              fileType: json
+              activities:
+                ids:
+                - '1'
+                status: active
+              users:
+                ids:
+                - '1'
+              folders:
+                ids:
+                - '1'
+              tags:
+                ids:
+                - 1
+              mentions:
+                ids:
+                - 1
+              operator: OR
+              noteQuery: text
+      responses:
+        '200':
+          description: Report in CSV format
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                message: Explanation of what has happened
+  /api/v4/tags-and-mentions:
+    get:
+      summary: Fetch Tags & Mentions
+      operationId: fetchTagsMentions
+      tags:
+      - Tags & Mentions
+      description: Fetches all Tags and Mentions, including from third party integrations, such as JIRA, Toggl etc.
+      responses:
+        '200':
+          description: List of Tags and Mentions
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tags:
+    post:
+      summary: Create Tag
+      operationId: createTag
+      tags:
+      - Tags & Mentions
+      description: Creates a Tag within the given Folder and scope (timeular is default).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              key: tagtagtag
+              label: my new tag
+              scope: timeular
+              folderId: '1'
+      responses:
+        '200':
+          description: Create Tag
+          content:
+            application/json:
+              example:
+                id: 1
+                key: tagtagtag
+                label: my new tag
+                scope: timeular
+                folderId: '1'
+        '404':
+          description: Folder Not Found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/tags/{id}:
+    patch:
+      summary: Update Tag
+      operationId: updateTag
+      tags:
+      - Tags & Mentions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              label: New Label for tag
+      responses:
+        '200':
+          description: Updated Tag
+          content:
+            application/json:
+              example:
+                id: 1
+                key: 44f8feac-da6f-4e08-8a84-0cc5181d32d7
+                label: New Label for tag
+                scope: timeular
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Delete Tag
+      operationId: deleteTag
+      tags:
+      - Tags & Mentions
+      description: Deletes the given tag, returning the list of timeEntries, which were edited by this operation, as well
+        as if the currentTracking was edited by deleting the tag.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                timeEntryIds:
+                - 1234
+                trackingEdited: null
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/mentions:
+    post:
+      summary: Create Mention
+      operationId: createMention
+      tags:
+      - Tags & Mentions
+      description: Creates a Mention within the given Folder and scope (timeular is default).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              key: mention
+              label: my new mention
+              scope: timeular
+              folderId: '1'
+      responses:
+        '200':
+          description: Created Mention
+          content:
+            application/json:
+              example:
+                id: 1
+                key: mention
+                label: my new mention
+                scope: timeular
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '404':
+          description: Folder not found
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/mentions/{id}:
+    patch:
+      summary: Update Mention
+      operationId: updateMention
+      tags:
+      - Tags & Mentions
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              label: My new mention label
+      responses:
+        '200':
+          description: Updated Mention
+          content:
+            application/json:
+              example:
+                id: 1
+                key: mention
+                label: My new mention label
+                scope: timeular
+                folderId: '1'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Delete Mention
+      operationId: deleteMention
+      tags:
+      - Tags & Mentions
+      description: Deletes the given mention, returning the list of timeEntries, which were edited by this operation, as well
+        as if the currentTracking was edited by deleting the mention.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              example:
+                timeEntryIds:
+                - 1234
+                trackingEdited: null
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/me:
+    get:
+      summary: Me
+      operationId: me
+      tags:
+      - Users
+      description: An endpoint for fetching your basic profile information.
+      responses:
+        '200':
+          description: Me
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: My name
+                email: my-name@example.com
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/users:
+    get:
+      summary: List all Users
+      operationId: listAllUsers
+      tags:
+      - Users
+      description: An endpoint for fetching basic information about your team members.
+      responses:
+        '200':
+          description: List of Users
+          content:
+            application/json:
+              example:
+                users:
+                - id: '1'
+                  name: My name
+                  email: my-name@example.com
+                - id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/folders/{id}/members:
+    get:
+      summary: List all Folder Members
+      operationId: listAllFolderMembers
+      tags:
+      - Members
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of Folder Members
+          content:
+            application/json:
+              example:
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                - id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+                  accessLevel: personal
+                retiredMembers:
+                - id: '3'
+                  name: My old teammate
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    post:
+      summary: Add Member to Folder
+      operationId: addMemberToFolder
+      tags:
+      - Members
+      description: 'With this endpoint you can add a new Member to an existing Folder. You should identify new Member by email
+        and set their access level to "full" or "personal".
+
+        Team members with a subscription seat are immediately added to Folder.
+
+        Users without a subscription seat or without a EARLY account receive an invitation email and their "id" in response
+        body has value "pending". They will appear with a Guest badge in the Members list.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              email: my-teammate@example.com
+              accessLevel: personal
+      responses:
+        '200':
+          description: Invited Member
+          content:
+            application/json:
+              example:
+                id: pending
+                name: ''
+                email: guest@example.com
+                accessLevel: personal
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+        '400':
+          description: No Subscription Seat
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only users with a seat can be directly added to folders. Assign user a seat or invite them to the
+                    folder through the app instead.
+  /api/v4/folders/{id}/members/{id}:
+    get:
+      summary: Find Folder Member by their ID
+      operationId: findFolderMemberByTheirId
+      tags:
+      - Members
+      description: 'An endpoint to show information about Folder Member.
+
+        You can use GET users endpoint to find IDs of all of your team members.
+
+        Access level is "full" or "personal". Full access members can do things like create and edit activities and tags within
+        a Folder. Personal access members are able to track time entries using the activities and tags that the Full access
+        members have created. Learn more about access levels.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Found Member
+          content:
+            application/json:
+              example:
+                id: '2'
+                name: My teammate
+                email: my-teammate@example.com
+                accessLevel: personal
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Remove Member from Folder
+      operationId: removeMemberFromFolder
+      tags:
+      - Members
+      description: With this endpoint you can remove a Member from Folder. Member who was removed from Folder will be returned
+        in retiredMembers response field in Folder endpoints. Removing a Member can take a few minutes.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              example:
+                message: pending
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/folders:
+    get:
+      summary: List all Folders
+      operationId: listAllFolders
+      tags:
+      - Folders
+      responses:
+        '200':
+          description: List of Folders
+          content:
+            application/json:
+              example:
+                folders:
+                - id: '1'
+                  name: My folder
+                  status: active
+                  members:
+                  - id: '1'
+                    name: My name
+                    email: my-email@example.com
+                    accessLevel: full
+                  - id: '2'
+                    name: My teammate
+                    email: my-teammate@example.com
+                    accessLevel: personal
+                  retiredMembers:
+                  - id: '3'
+                    name: My old teammate
+                - id: '2'
+                  name: Other folder
+                  status: active
+                  members:
+                  - id: '1'
+                    name: My name
+                    email: my-email@example.com
+                    accessLevel: personal
+                  - id: '2'
+                    name: My teammate
+                    email: my-teammate@example.com
+                    accessLevel: full
+                  retiredMembers: []
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    post:
+      summary: Create a Folder
+      operationId: createAFolder
+      tags:
+      - Folders
+      description: 'With this endpoint you can create a new Folder. It should have a name, but the name doesn’t have to be
+        unique.
+
+        If you don''t want a new Folder to become a Workspace Folder, add an optional field isWorkspaceFolder: false (defaults
+        to true).'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: My folder
+      responses:
+        '201':
+          description: Created Folder
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: My folder
+                status: active
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                retiredMembers: []
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/folders/{id}:
+    get:
+      summary: Find Folder by its ID
+      operationId: findFolderByItsId
+      tags:
+      - Folders
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Found Folder
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: My folder
+                status: active
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                - id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+                  accessLevel: personal
+                retiredMembers:
+                - id: '3'
+                  name: My old teammate
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    patch:
+      summary: Edit a Folder
+      operationId: editAFolder
+      tags:
+      - Folders
+      description: With this endpoint you can edit a name of an existing Folder.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              name: Better name
+      responses:
+        '200':
+          description: Edited Folder
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: Better name
+                status: active
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                - id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+                  accessLevel: personal
+                retiredMembers:
+                - id: '3'
+                  name: My old teammate
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+    delete:
+      summary: Delete a Folder
+      operationId: deleteAFolder
+      tags:
+      - Folders
+      description: With this endpoint you can delete existing Folder. Deleting a Folder is NOT reversible and cannot be undone.
+        You may consider archiving a Folder instead. Deletion can take a few minutes.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              example:
+                message: pending
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/folders/{id}/archive:
+    post:
+      summary: Archive a folder
+      operationId: archiveAFolder
+      tags:
+      - Folders
+      description: When a Folder is no longer needed, you can archive it. It will not be possible to edit the Folder settings
+        or add new Members. All folder Activities, Tags and Mentions will be archived. Unlike deleting a Folder, archiving
+        can be undone.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Folder Archived
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: My folder
+                status: archived
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                retiredMembers: []
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/folders/{id}/unarchive:
+    post:
+      summary: Unarchive a Folder
+      operationId: unarchiveAFolder
+      tags:
+      - Folders
+      description: Undo archiving a Folder. All folder Activities, Tags and Mentions will be unarchived.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Folder Unarchived
+          content:
+            application/json:
+              example:
+                id: '1'
+                name: My folder
+                status: active
+                members:
+                - id: '1'
+                  name: My name
+                  email: my-email@example.com
+                  accessLevel: full
+                retiredMembers: []
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/leaves:
+    get:
+      summary: List all Leaves
+      operationId: listAllLeaves
+      tags:
+      - Leaves
+      description: With this endpoint you can list all your Leaves. If you are Admin or Owner you can list Leaves of all your
+        Team members or just one of them using userId param.
+      responses:
+        '200':
+          description: List of Leaves
+          content:
+            application/json:
+              example:
+                timeLeaves:
+                - id: '1'
+                  typeId: '11'
+                  startDate: '2025-02-17T00:00:00.000'
+                  endDate: '2025-02-28T23:59:59.999'
+                  note: null
+                  status: approved
+                  user:
+                    id: '1'
+                    name: My name
+                    email: my-name@example.com
+                - id: '2'
+                  typeId: '12'
+                  startDate: '2025-03-05T09:00:00.000'
+                  endDate: '2025-03-05T13:00:00.000'
+                  note: I don't feel like working
+                  status: denied
+                  user:
+                    id: '1'
+                    name: My name
+                    email: my-name@example.com
+                - id: '3'
+                  typeId: '9'
+                  startDate: '2025-03-27T00:00:00.000'
+                  endDate: '2025-03-27T23:59:59.999'
+                  note: null
+                  status: pending
+                  user:
+                    id: '2'
+                    name: My teammate
+                    email: my-teammate@example.com
+        '404':
+          description: User Not Found
+          content:
+            application/json:
+              example:
+                error:
+                  message: User not found
+    post:
+      summary: Create a Leave
+      operationId: createALeave
+      tags:
+      - Leaves
+      description: 'Create a Leave for yourself. If the Leave exceeds working hours for that day, it will be expanded into
+        a full-day leave.
+
+        To create a Leave on behalf of a Team member use Create a Leave for User endpoint instead.
+
+        typeId, startDate and endDate fields are required.
+
+        note field is optional.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              typeId: '1'
+              startDate: '2025-01-01T06:00:00.000'
+              endDate: '2025-01-01T20:00:00.000'
+              note: Time to relax
+      responses:
+        '200':
+          description: Created Leave
+          content:
+            application/json:
+              example:
+                id: '1'
+                typeId: '1'
+                startDate: '2025-01-01T00:00:00.000'
+                endDate: '2025-01-01T23:59:59.999'
+                note: Time to relax
+                status: pending
+                user:
+                  id: '1'
+                  name: My name
+                  email: my-name@example.com
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/leaves/types:
+    get:
+      summary: List all Leave Types
+      operationId: listAllLeaveTypes
+      tags:
+      - Leaves
+      description: With this endpoint you can list Leave types. Other Leave requests use typeId to indicate their type.
+      responses:
+        '200':
+          description: List of Leave Types
+          content:
+            application/json:
+              example:
+                types:
+                - id: '1'
+                  name: Paid Leave
+                - id: '2'
+                  name: Sick Leave
+                - id: '3'
+                  name: Unpaid Leave
+                - id: '4'
+                  name: Public Holiday
+                - id: '5'
+                  name: Company Holiday
+                - id: '6'
+                  name: Sabbatical Leave
+                - id: '7'
+                  name: Bereavement Leave
+                - id: '8'
+                  name: Duvet Day
+                - id: '9'
+                  name: Gardening Leave
+                - id: '10'
+                  name: Time Off in Lieu
+                - id: '11'
+                  name: Carryover
+                - id: '12'
+                  name: Parental Leave
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/users/{id}/leaves:
+    post:
+      summary: Create a Leave for User
+      operationId: createALeaveForUser
+      tags:
+      - Leaves
+      description: 'Create an approved Leave on behalf of a Team member. Requires Admin or Owner role.
+
+        If the Leave exceeds Team member''s working hours for that day, it will be expanded into a full-day leave.
+
+        typeId, startDate and endDate fields are required.
+
+        note field is optional.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              typeId: '1'
+              startDate: '2025-01-01T06:00:00.000'
+              endDate: '2025-01-01T20:00:00.000'
+              note: Extra day off
+      responses:
+        '200':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/leaves/{id}/approve:
+    post:
+      summary: Approve a Leave
+      operationId: approveALeave
+      tags:
+      - Leaves
+      description: 'Approve a Leave of Team member. Requires Admin or Owner role.
+
+        Future Leave can be approved regardless of its status, so it''s possible to change status of a future Leave from denied
+        to approved using this endpoint. Only pending past Leave can be approved.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Approved Leave
+          content:
+            application/json:
+              example:
+                id: '1'
+                typeId: '1'
+                startDate: '2025-01-01T00:00:00.000'
+                endDate: '2025-01-01T23:59:59.999'
+                note: null
+                status: approved
+                user:
+                  id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only pending time leaves can be approved in the past
+  /api/v4/leaves/{id}/deny:
+    post:
+      summary: Deny a Leave
+      operationId: denyALeave
+      tags:
+      - Leaves
+      description: 'Deny a Leave of Team member. Requires Admin or Owner role.
+
+        Future Leave can be denied regardless of its status, so it''s possible to change status of a future Leave from approved
+        to denied using this endpoint. Only pending past Leave can be denied.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Denied Leave
+          content:
+            application/json:
+              example:
+                id: '1'
+                typeId: '1'
+                startDate: '2025-01-01T00:00:00.000'
+                endDate: '2025-01-01T23:59:59.999'
+                note: null
+                status: denied
+                user:
+                  id: '2'
+                  name: My teammate
+                  email: my-teammate@example.com
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error:
+                  message: Only pending time leaves can be denied in the past
+  /api/v4/leaves/{id}:
+    delete:
+      summary: Delete a Leave
+      operationId: deleteALeave
+      tags:
+      - Leaves
+      description: 'Delete a Leave. If it''s a Leave of another Team member, action requires Admin or Owner role.
+
+        This is an irreversible action. If you want to deny a Leave use Deny a Leave endpoint instead.'
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                message: success
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              example:
+                error:
+                  message: Explanation of what has happened
+  /api/v4/webhooks/event:
+    get:
+      summary: List available events
+      operationId: listAvailableEvents
+      tags:
+      - Webhooks
+      description: Returns a list of events, which can be subscribed to.
+      responses:
+        '200':
+          description: List of Events
+          content:
+            application/json:
+              example:
+                events:
+                - timeEntryCreated
+                - timeEntryUpdated
+                - timeEntryDeleted
+                - trackingStarted
+                - trackingStopped
+                - trackingEdited
+                - trackingCanceled
+                - activityCreated
+                - activityUpdated
+                - activityDeleted
+                - folderCreated
+                - folderUpdated
+                - folderDeleted
+                - timeLeaveCreated
+                - timeLeaveUpdated
+                - timeLeaveDeleted
+                - timeLeaveApproved
+                - timeLeaveDenied
+  /api/v4/webhooks/subscription:
+    post:
+      summary: Subscribe
+      operationId: subscribe
+      tags:
+      - Webhooks
+      description: 'Creates a webhook subscription for the given event. That means that if the event happens (e.g. a time
+        entry is created), the given target url will be called with the payload of the event.
+
+        The URL needs to be a valid, publicly reachable, HTTPS URL.
+
+        The webhook has a timeout of 10 seconds, so if it takes longer to call the given URL, it will fail.
+
+        If the given target URL returns a 410 GONE error, this webhook subscription will automatically be unsubscribed.
+
+        See the Webhooks description for further information about the payloads.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              event: trackingStarted
+              target_url: https://example.org/some-endpoint
+      responses:
+        '200':
+          description: Subscription ID
+          content:
+            application/json:
+              example:
+                id: '123456'
+        '400':
+          description: Maximum Number of Subscriptions per Event
+          content:
+            application/json:
+              example:
+                message: maximum subscriptions per event exceeded
+                status: 400 Bad Request
+    get:
+      summary: List Subscriptions
+      operationId: listSubscriptions
+      tags:
+      - Webhooks
+      description: Lists all webhook subscriptions for the current user.
+      responses:
+        '200':
+          description: List of subscriptions
+          content:
+            application/json:
+              example:
+                subscriptions:
+                - id: '123456'
+                  event: trackingStarted
+                  target_url: https://example.org/some-endpoint
+    delete:
+      summary: Unsubscribe all for User
+      operationId: unsubscribeAllForUser
+      tags:
+      - Webhooks
+      description: Removes all webhooks subscriptions for the current user.
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              example:
+                message: success
+  /api/v4/webhooks/subscription/{id}:
+    delete:
+      summary: Unsubscribe
+      operationId: unsubscribe
+      tags:
+      - Webhooks
+      description: Removes a webhook subscription by id.
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Unsubscribe
+          content:
+            application/json:
+              example:
+                message: success
+        '404':
+          description: Subscription not found
+          content:
+            application/json:
+              example:
+                message: could not find subscription with id 123456
+                status: 404 Not Found
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Access Token obtained from POST /developer/sign-in using your API Key and API Secret.

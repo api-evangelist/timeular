@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/timeular-early-openapi.yml
+skills:
+- file: timeular-track-time.md
+  name: Track time with a live session
+  api: openapi/timeular-early-openapi.yml
+  operations: [signInWithApiKeyApiSecret, listAllActivities, showCurrentTracking, startTracking, stopTracking]
+- file: timeular-log-and-tag-entry.md
+  name: Create and tag a time entry
+  api: openapi/timeular-early-openapi.yml
+  operations: [signInWithApiKeyApiSecret, listAllActivities, fetchTagsMentions, createTag, createTimeEntry]
+- file: timeular-report-time.md
+  name: Report time over a date range
+  api: openapi/timeular-early-openapi.yml
+  operations: [signInWithApiKeyApiSecret, findTimeEntriesInGivenRange, generateReport]
+- file: timeular-subscribe-webhook.md
+  name: Subscribe to time-tracking webhooks
+  api: openapi/timeular-early-openapi.yml
+  operations: [signInWithApiKeyApiSecret, listAvailableEvents, subscribe, listSubscriptions, unsubscribe]

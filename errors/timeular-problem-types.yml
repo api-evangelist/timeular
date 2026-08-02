@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/timeular-early-openapi.yml (response codes observed across the public Postman collection)
+format: http-status
+summary: >-
+  The EARLY (Timeular) Public API signals errors with standard HTTP status codes and
+  a JSON body. The following status codes are observed across the documented V4
+  operations. EARLY does not publish an RFC 9457 problem+json media type; errors are
+  plain application/json.
+envelope:
+  media_type: application/json
+  detail: A JSON object describing the error is returned with the HTTP status.
+problems:
+- status: 400
+  title: Bad Request
+  meaning: The request was malformed or failed validation (e.g. invalid timestamp range, missing required field).
+  action: Fix the request payload or parameters and retry.
+- status: 401
+  title: Unauthorized
+  meaning: Missing, expired, or invalid Access Token. Most secured endpoints return this without a valid Bearer token.
+  action: Sign in again via POST /api/v4/developer/sign-in to obtain a fresh Access Token.
+- status: 403
+  title: Forbidden
+  meaning: The authenticated user lacks permission for the requested resource or action.
+  action: Verify the user's role/membership (e.g. folder membership, leave approval rights).
+- status: 404
+  title: Not Found
+  meaning: The referenced resource (activity, time entry, folder, tag, subscription, ...) does not exist.
+  action: Confirm the resource id.
+- status: 409
+  title: Conflict
+  meaning: The request conflicts with current state (e.g. tracking already running, duplicate).
+  action: Reconcile state (e.g. stop current tracking) before retrying.
+- status: 500
+  title: Internal Server Error
+  meaning: An unexpected server-side error occurred.
+  action: Retry later; contact support if it persists.

@@ -1,0 +1,31 @@
+generated: '2026-07-21'
+method: searched
+host: https://api.early.app
+also_probed:
+- https://early.app
+summary: >-
+  Probed the standard /.well-known/ discovery surface on the EARLY API host and
+  marketing domain. No discovery documents are published; the API host returns 403
+  and the marketing domain returns 404 for these paths. Recorded as valid negative data.
+documents:
+- path: /.well-known/security.txt
+  host: https://api.early.app
+  status: 403
+- path: /.well-known/security.txt
+  host: https://early.app
+  status: 404
+- path: /.well-known/openid-configuration
+  host: https://api.early.app
+  status: 403
+- path: /.well-known/oauth-authorization-server
+  host: https://api.early.app
+  status: 403
+- path: /.well-known/api-catalog
+  host: https://api.early.app
+  status: 403
+- path: /.well-known/ai-plugin.json
+  host: https://api.early.app
+  status: 403
+- path: /.well-known/ai-plugin.json
+  host: https://early.app
+  status: 404

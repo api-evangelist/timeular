@@ -1,8 +1,29 @@
 aid: timeular
 name: Timeular
-description: Timeular is a company surfaced as a portfolio company of speedinvest and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Timeular (now branded EARLY) is a time-tracking company whose apps and physical
+  tracking device help individuals and teams capture where their time goes. Its
+  public REST API — hosted at api.early.app — lets developers manage activities,
+  start and stop live tracking, create and query time entries over date ranges,
+  generate reports, organize tags and mentions, administer folders, users and
+  leave, and subscribe to webhooks for time-tracking and leave events. Authentication
+  uses an API Key and API Secret exchanged for a short-lived Bearer Access Token.
+  The API is versioned in the URI path (V4 is current; V3 and V2 remain available)
+  and is published as a public Postman collection. Timeular is backed by Speedinvest.
 url: https://raw.githubusercontent.com/api-evangelist/timeular/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://content.pstmn.io/b2851088-5dea-4fb1-9fc8-ba83d3c33bc2/RUFSTFktV09SRE1BUkstREFSSy1HUkVFTi1QUklNQVJZLnBuZw==
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -11,12 +32,393 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Time Tracking
+- Productivity
+- Time Management
+- Reporting
+- Team Management
+- Webhooks
+- SaaS
+apis:
+- aid: timeular:timeular-activities-api
+  name: Timeular Activities API
+  description: The Activities API from Timeular — 3 operation(s) for activities.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-activities-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-authentication-api
+  name: Timeular Authentication API
+  description: The Authentication API from Timeular — 3 operation(s) for authentication.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-authentication-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-current-tracking-api
+  name: Timeular Current Tracking API
+  description: The Current Tracking API from Timeular — 3 operation(s) for current tracking.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Current Tracking
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-current-tracking-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-folders-api
+  name: Timeular Folders API
+  description: The Folders API from Timeular — 4 operation(s) for folders.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-folders-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-leaves-api
+  name: Timeular Leaves API
+  description: The Leaves API from Timeular — 6 operation(s) for leaves.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Leaves
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-leaves-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-members-api
+  name: Timeular Members API
+  description: The Members API from Timeular — 2 operation(s) for members.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Members
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-members-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-reports-api
+  name: Timeular Reports API
+  description: The Reports API from Timeular — 1 operation(s) for reports.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-reports-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-tags-mentions-api
+  name: Timeular Tags & Mentions API
+  description: The Tags & Mentions API from Timeular — 5 operation(s) for tags & mentions.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Tags & Mentions
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-tags-mentions-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-time-entries-api
+  name: Timeular Time Entries API
+  description: The Time Entries API from Timeular — 3 operation(s) for time entries.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Time Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-time-entries-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-users-api
+  name: Timeular Users API
+  description: The Users API from Timeular — 2 operation(s) for users.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-users-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+- aid: timeular:timeular-webhooks-api
+  name: Timeular Webhooks API
+  description: The Webhooks API from Timeular — 3 operation(s) for webhooks.
+  humanURL: https://developers.early.app/
+  baseURL: https://api.early.app/api/v4
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/timeular-webhooks-api-openapi.yml
+  - type: Postman
+    url: https://developers.early.app/
+  - type: PostmanCollection
+    url: postman/timeular-early-postman.json
+  - type: Authentication
+    url: authentication/timeular-authentication.yml
+  - type: Webhooks
+    url: webhooks/timeular-early-webhooks.yml
+  - type: AsyncAPI
+    url: asyncapi/timeular-early-asyncapi.yml
+  - type: ErrorCatalog
+    url: errors/timeular-problem-types.yml
+  - type: Conventions
+    url: conventions/timeular-conventions.yml
+  - type: DataModel
+    url: data-model/timeular-data-model.yml
+  - type: Conformance
+    url: conformance/timeular-conformance.yml
+  - type: AgenticAccess
+    url: agentic-access/timeular-agentic-access.yml
+common:
+- type: DeveloperPortal
+  url: https://developers.early.app/
+- type: Documentation
+  url: https://developers.early.app/
+- type: APIReference
+  url: https://developers.early.app/
+- type: GettingStarted
+  url: https://developers.early.app/
+- type: Support
+  url: https://support.early.app/en/
+- type: Blog
+  url: https://early.app/blog/
+- type: Pricing
+  url: https://early.app/pricing/
+- type: SignUp
+  url: https://product.early.app/register
+- type: Login
+  url: https://product.early.app/login
+- type: PrivacyPolicy
+  url: https://early.app/privacy-policy/
+- type: GitHubOrganization
+  url: https://github.com/timeular
+- type: Website
+  url: https://early.app/
+- type: MCPServer
+  url: mcp/timeular-mcp.yml
+- type: LLMsTxt
+  url: llms/timeular-llms.txt
+- type: Lifecycle
+  url: lifecycle/timeular-lifecycle.yml
+- type: WellKnown
+  url: well-known/timeular-well-known.yml
+- type: DomainSecurity
+  url: security/timeular-domain-security.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Webhooks
+  url: webhooks/timeular-early-webhooks.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

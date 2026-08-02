@@ -1,0 +1,126 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/timeular-early-openapi.yml + https://developers.early.app/
+summary: >-
+  Entity-relationship model for the EARLY (Timeular) Public API, derived from the V4
+  resource routes and payloads. Core entities revolve around time entries that record
+  an activity over an interval, optionally tagged and annotated with mentions.
+entities:
+- name: User
+  key: id
+  routes:
+  - 'GET /me'
+  - 'GET /users'
+  - 'POST /users/{id}/leaves'
+- name: Activity
+  key: id
+  routes:
+  - 'GET /activities'
+  - 'POST /activities'
+  - 'PATCH /activities/{id}'
+  - 'DELETE /activities/{id}'
+  - 'POST /activities/{id}/unarchive'
+- name: Tracking
+  description: The currently running (live) tracking session for the user.
+  routes:
+  - 'GET /tracking'
+  - 'POST /tracking/{id}/start'
+  - 'PATCH /tracking'
+  - 'POST /tracking/stop'
+  - 'DELETE /tracking'
+- name: TimeEntry
+  key: id
+  routes:
+  - 'GET /time-entries/{start}/{end}'
+  - 'POST /time-entries'
+  - 'GET /time-entries/{id}'
+  - 'PATCH /time-entries/{id}'
+  - 'DELETE /time-entries/{id}'
+- name: Tag
+  key: id
+  routes:
+  - 'GET /tags-and-mentions'
+  - 'POST /tags'
+  - 'PATCH /tags/{id}'
+  - 'DELETE /tags/{id}'
+- name: Mention
+  key: id
+  routes:
+  - 'POST /mentions'
+  - 'PATCH /mentions/{id}'
+  - 'DELETE /mentions/{id}'
+- name: Folder
+  key: id
+  routes:
+  - 'GET /folders'
+  - 'POST /folders'
+  - 'GET /folders/{id}'
+  - 'PATCH /folders/{id}'
+  - 'DELETE /folders/{id}'
+  - 'POST /folders/{id}/archive'
+  - 'POST /folders/{id}/unarchive'
+- name: FolderMember
+  routes:
+  - 'GET /folders/{id}/members'
+  - 'GET /folders/{id}/members/{memberId}'
+  - 'POST /folders/{id}/members'
+  - 'DELETE /folders/{id}/members/{memberId}'
+- name: Leave
+  key: id
+  routes:
+  - 'GET /leaves'
+  - 'POST /leaves'
+  - 'POST /users/{id}/leaves'
+  - 'POST /leaves/{id}/approve'
+  - 'POST /leaves/{id}/deny'
+  - 'DELETE /leaves/{id}'
+- name: LeaveType
+  routes:
+  - 'GET /leaves/types'
+- name: Report
+  routes:
+  - 'POST /report'
+- name: WebhookSubscription
+  key: id
+  routes:
+  - 'GET /webhooks/event'
+  - 'POST /webhooks/subscription'
+  - 'GET /webhooks/subscription'
+  - 'DELETE /webhooks/subscription/{id}'
+relationships:
+- from: TimeEntry
+  to: Activity
+  type: belongs_to
+  via: activityId
+- from: TimeEntry
+  to: Tag
+  type: has_many
+  via: tags
+- from: TimeEntry
+  to: Mention
+  type: has_many
+  via: mentions
+- from: Tracking
+  to: Activity
+  type: belongs_to
+  via: activityId
+- from: Folder
+  to: FolderMember
+  type: has_many
+  via: members
+- from: FolderMember
+  to: User
+  type: belongs_to
+  via: userId
+- from: Leave
+  to: User
+  type: belongs_to
+  via: userId
+- from: Leave
+  to: LeaveType
+  type: belongs_to
+  via: typeId
+- from: WebhookSubscription
+  to: User
+  type: belongs_to
+  via: userId

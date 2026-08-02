@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://developers.early.app/ (public Postman collection T1DwdEke)
+summary: >-
+  Versioning and lifecycle posture for the EARLY (Timeular) Public API, observed from
+  the provider's public API documentation. The API is versioned in the URI path.
+versioning:
+  scheme: uri-path
+  current: v4
+  available: [v4, v3, v2]
+  docs: https://developers.early.app/
+  detail: >-
+    V4 is labeled CURRENT in the published documentation. V3 and V2 are still
+    documented and reachable; older versions overlap in capability with V4, which
+    adds folders, users, and leave management.
+rebrand:
+  note: Timeular rebranded to EARLY; developers.timeular.com now redirects to developers.early.app and the API host is api.early.app.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  detail: No formal deprecation policy, Sunset/Deprecation header support, or SLA document was found in the public API documentation.
+status_page: null
+sla: null
+notes: >-
+  No public status page (status.early.app / help.early.app do not resolve) and no
+  published SLA were found at the time of enrichment.
