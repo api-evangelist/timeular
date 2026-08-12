@@ -374,6 +374,8 @@ apis:
   - type: AgenticAccess
     url: agentic-access/timeular-agentic-access.yml
 common:
+- type: Overlay
+  url: overlays/timeular-early-overlay.yaml
 - type: DeveloperPortal
   url: https://developers.early.app/
 - type: Documentation
