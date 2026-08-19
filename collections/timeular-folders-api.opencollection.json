@@ -1,0 +1,144 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Folders API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Folders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/folders"
+          },
+          "docs": "List all Folders"
+        },
+        {
+          "info": {
+            "name": "Create a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/folders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can create a new Folder. It should have a name, but the name doesn’t have to be unique.\nIf you don't want a new Folder to become a Workspace Folder, add an optional field isWorkspaceFolder: false (defaults to true)."
+        },
+        {
+          "info": {
+            "name": "Find Folder by its ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Find Folder by its ID"
+        },
+        {
+          "info": {
+            "name": "Edit a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can edit a name of an existing Folder."
+        },
+        {
+          "info": {
+            "name": "Delete a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "With this endpoint you can delete existing Folder. Deleting a Folder is NOT reversible and cannot be undone. You may consider archiving a Folder instead. Deletion can take a few minutes."
+        },
+        {
+          "info": {
+            "name": "Archive a folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "When a Folder is no longer needed, you can archive it. It will not be possible to edit the Folder settings or add new Members. All folder Activities, Tags and Mentions will be archived. Unlike deleting a Folder, archiving can be undone."
+        },
+        {
+          "info": {
+            "name": "Unarchive a Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Undo archiving a Folder. All folder Activities, Tags and Mentions will be unarchived."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

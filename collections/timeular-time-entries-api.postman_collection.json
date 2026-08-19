@@ -1,0 +1,1401 @@
+{
+  "item": [
+    {
+      "id": "c4bb3dbc-e2d9-4b20-85fc-4faf2215c040",
+      "name": "Time Entries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98079455-7dce-455f-b714-9c11d19a67aa",
+          "name": "Find Time Entries in given range",
+          "request": {
+            "name": "Find Time Entries in given range",
+            "description": {
+              "content": "Find Time Entries within the given time range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "time-entries",
+                ":timestamp",
+                ":timestamp"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "timestamp",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4f0fb071-5326-48de-ada7-8d71491d2e15",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":timestamp",
+                    ":timestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timestamp",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timeEntries\": [\n    {\n      \"id\": \"1\",\n      \"activity\": {\n        \"id\": \"1\",\n        \"name\": \"abc\",\n        \"color\": \"#000000\",\n        \"folderId\": \"1\"\n      },\n      \"duration\": {\n        \"startedAt\": \"2020-01-01T00:00:00.000\",\n        \"stoppedAt\": \"2020-01-01T01:00:00.000\"\n      },\n      \"note\": {\n        \"text\": \"If there is a possibility of several things going wrong, the one that will cause the most damage will be the one to go wrong <{{|t|2|}}><{{|t|1|}}><{{|m|1|}}><{{|m|2|}}>\",\n        \"tags\": [\n          {\n            \"id\": 1,\n            \"key\": \"43d10bff-65c6-4aab-879e-8e4b9106c99d\",\n            \"label\": \"burst\",\n            \"scope\": \"timeular\",\n            \"folderId\": \"1\"\n          },\n          {\n            \"id\": 2,\n            \"key\": \"849ab930-4492-4b73-b378-8bff6d12fdd0\",\n            \"label\": \"interpret\",\n            \"scope\": \"timeular\",\n            \"folderId\": \"1\"\n          }\n        ],\n        \"mentions\": [\n          {\n            \"id\": 1,\n            \"key\": \"8ed8ca39-813b-4f9d-a1ba-9a18b6c001e0\",\n            \"label\": \"Joanie\",\n            \"scope\": \"timeular\",\n            \"folderId\": \"1\"\n          },\n          {\n            \"id\": 2,\n            \"key\": \"999f14a2-c0d2-430a-b1c0-23495f96b1cb\",\n            \"label\": \"Violette\",\n            \"scope\": \"timeular\",\n            \"folderId\": \"1\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b9203db-65d0-4e9d-b464-1570696a25b7",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":timestamp",
+                    ":timestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timestamp",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b74bd6c9-921f-4b1c-a6e2-a832844f3508",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":timestamp",
+                    ":timestamp"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "timestamp",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cf91e05-1128-4e54-8ffa-7e132e3f7dbf",
+          "name": "Create Time Entry",
+          "request": {
+            "name": "Create Time Entry",
+            "description": {
+              "content": "With this endpoint, you can create a new Time Entry. It should be connected to an Activity and have a duration no shorter than 1 minute. A Note can be provided too, but it’s not required. Within this Note, you can refer one or more Tags or Mentions.\nThese Tags and Mentions need to be referenced by their ID and put inside a special prefix and suffix, &lt;{{|t|1|}}&gt; for the tag with id 1 and &lt;{{|m|1|}}&gt; for the mention with id 1.\nIf the related Activity is bound to some Integration, let’s say a JIRA Project, JIRA task IDs is a valid Mention. The Time Entry will be created even if it overlaps with other Time Entries – in result existing Time Entries will be split or deleted in such manner, that new one will fit without overlapping.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "time-entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:00:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:00:00.000\",\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83bb973b-fcbc-4fe9-a0ff-e3c0ca44683c",
+              "name": "Created Time Entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:00:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:00:00.000\",\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1\",\n  \"activity\": {\n    \"id\": \"1\",\n    \"name\": \"abc\",\n    \"color\": \"#000000\",\n    \"folderId\": \"1\"\n  },\n  \"duration\": {\n    \"startedAt\": \"2016-08-05T06:00:00.000\",\n    \"stoppedAt\": \"2016-08-05T07:00:00.000\"\n  },\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}><{{|m|1|}}>\",\n    \"tags\": [\n      {\n        \"id\": 1,\n        \"key\": \"dabf59bc-9997-44ca-9451-e753a11090c4\",\n        \"label\": \"some-tag\",\n        \"scope\": \"timeular\",\n        \"folderId\": \"1\"\n      }\n    ],\n    \"mentions\": [\n      {\n        \"id\": 1,\n        \"key\": \"debf59bc-9997-44ca-9451-e753a11090c4\",\n        \"label\": \"some mention\",\n        \"scope\": \"timeular\",\n        \"folderId\": \"1\"\n      }\n    ]\n  },\n  \"errors\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38b36c9c-cdd3-4077-9a8e-26b719920fda",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:00:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:00:00.000\",\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a4ec7b1-b4d6-4220-be45-a03d0da59b75",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:00:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:00:00.000\",\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27862b99-b041-4f48-8960-e96ebfcf808a",
+              "name": "Activity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:00:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:00:00.000\",\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "135fdab4-7fc3-4413-a3cc-447d4d9be0f6",
+              "name": "Integration-related error, eg. if new Time Entry somehow conflicts with data on the Integration side",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:00:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:00:00.000\",\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e06044af-720f-432d-a221-c668ac2f14e9",
+          "name": "Find Time Entry by its ID",
+          "request": {
+            "name": "Find Time Entry by its ID",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "time-entries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8c95c0c-7a0e-466d-a0dc-bf008b209fad",
+              "name": "Found Time Entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3\",\n  \"activity\": {\n    \"id\": \"1\",\n    \"name\": \"abc\",\n    \"color\": \"#000000\",\n    \"folderId\": \"1\"\n  },\n  \"duration\": {\n    \"startedAt\": \"2016-08-05T06:00:00.000\",\n    \"stoppedAt\": \"2016-08-05T07:00:00.000\"\n  },\n  \"note\": {\n    \"text\": \"99 sheep <{{|t|1|}}><{{|m|1|}}>\",\n    \"tags\": [\n      {\n        \"id\": 1,\n        \"key\": \"dabf59bc-9997-44ca-9451-e753a11090c4\",\n        \"label\": \"some-tag\",\n        \"scope\": \"timeular\",\n        \"folderId\": \"1\"\n      }\n    ],\n    \"mentions\": [\n      {\n        \"id\": 1,\n        \"key\": \"debf59bc-9997-44ca-9451-e753a11090c4\",\n        \"label\": \"some mention\",\n        \"scope\": \"timeular\",\n        \"folderId\": \"1\"\n      }\n    ]\n  },\n  \"errors\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a80daf54-467b-480c-adae-13d11a39a303",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb5954b0-7021-48e9-8fe8-fbeca56e3e4b",
+              "name": "Time Entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5c68dc6e-1a01-4ecb-bf3e-2f2ca1b89ca7",
+          "name": "Edit a Time Entry",
+          "request": {
+            "name": "Edit a Time Entry",
+            "description": {
+              "content": "With this endpoint you can edit an existing time entry. When changing the activity ID please note, that both the new and old activity attached to time entry have to belong to same integration.\nTo remove a note, just set the complete object to null and all values within the object will be deleted too.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "time-entries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:01:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:01:00.000\",\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e5208a9a-83ec-4527-8db9-9ebad27d427d",
+              "name": "Edited Time Entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:01:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:01:00.000\",\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"1\",\n  \"activity\": {\n    \"id\": \"1\",\n    \"name\": \"abc\",\n    \"color\": \"#000000\",\n    \"folderId\": \"1\"\n  },\n  \"duration\": {\n    \"startedAt\": \"2016-08-05T06:00:00.000\",\n    \"stoppedAt\": \"2016-08-05T07:00:00.000\"\n  },\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}><{{|m|1|}}>\",\n    \"tags\": [\n      {\n        \"id\": 1,\n        \"key\": \"dabf59bc-9997-44ca-9451-e753a11090c4\",\n        \"label\": \"some-tag\",\n        \"scope\": \"timeular\",\n        \"folderId\": \"1\"\n      }\n    ],\n    \"mentions\": [\n      {\n        \"id\": 1,\n        \"key\": \"debf59bc-9997-44ca-9451-e753a11090c4\",\n        \"label\": \"some mention\",\n        \"scope\": \"timeular\",\n        \"folderId\": \"1\"\n      }\n    ]\n  },\n  \"errors\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0bd17063-7eee-4d93-902d-2532f3872597",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:01:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:01:00.000\",\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7b22f065-d72d-45cb-be1c-85a9f0ebd319",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:01:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:01:00.000\",\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0bd5659-0dcb-4ef1-823d-ad97ef646921",
+              "name": "Activity or Time Entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:01:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:01:00.000\",\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c5330f5-fe14-4d62-a158-5df4d3ea6289",
+              "name": "Integration-related error, eg. if given integration does not exist",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"activityId\": \"1\",\n  \"startedAt\": \"2016-08-05T06:01:00.000\",\n  \"stoppedAt\": \"2016-08-05T07:01:00.000\",\n  \"note\": {\n    \"text\": \"200 sheep <{{|t|1|}}> <{{|m|1|}}>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "709e14ae-f0de-4ea9-afc0-1d3c13ce2332",
+          "name": "Delete a Time Entry",
+          "request": {
+            "name": "Delete a Time Entry",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "time-entries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89d9fe12-78c6-43f9-a5eb-1902c10c1879",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"Any error which can be ignored and did not prevented action to be performed successfully.\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "46f96a10-1e53-454f-ac45-2e5f4f8bbdea",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "912e5a69-abaf-4f8b-acc8-0afe6327e074",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7864493a-0b8c-4fb8-a0a8-9091e2ca81e3",
+              "name": "Time Entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "time-entries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"message\": \"Explanation of what has happened\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.early.app/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b35eb72b-67dc-4aec-9c6d-afc40b17571a",
+    "name": "EARLY (Timeular) Public Activities Time Entries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.\n\nContact Support:\n Name: EARLY Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

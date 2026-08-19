@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Activities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/activities"
+          },
+          "docs": "List all Activities"
+        },
+        {
+          "info": {
+            "name": "Create an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/activities",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can create a new Activity. It should have a name, a folder and a color. The name doesn’t have to be unique."
+        },
+        {
+          "info": {
+            "name": "Edit an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.early.app/api/v4/api/v4/activities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit an Activity"
+        },
+        {
+          "info": {
+            "name": "Archive an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/activities/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Archive an Activity"
+        },
+        {
+          "info": {
+            "name": "Unarchive an Activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/activities/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Unarchive an Activity"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,72 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Authentication API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Sign-in with API Key & API Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/developer/sign-in",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can obtain an Access Token, which is required to access secured endpoints. To do so, you have to provide both an API Key and an API Secret.\nThey can be generated on https://product.early.app or, if you have an Access Token already, with a POST request to /developer/api-access.\nIf you have an Access Token, you need to set the Authorization Header in every secured request to Bearer your_access_token."
+        },
+        {
+          "info": {
+            "name": "Fetch API Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/developer/api-access"
+          },
+          "docs": "With this endpoint you can fetch your API Key. If you haven't generated one yet, null will be returned.\n You cannot obtain an API Secret in this way, since it’s visible only once right after generation. If you have lost your API Secret, please generate a new pair of API Key &amp; API Secret."
+        },
+        {
+          "info": {
+            "name": "Generate new API Key & API Secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/developer/api-access"
+          },
+          "docs": "With this endpoint you can generate a new pair of API Key &amp; API Secret.\nEvery time you generate a new pair, the old one becomes invalid. Your API Secret won’t be accessible later, so please note it down in some secret place. If you have lost your API Secret, you can generate a new pair of API Key &amp; API Secret here."
+        },
+        {
+          "info": {
+            "name": "Logout",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/developer/logout"
+          },
+          "docs": "With this endpoint you are invalidating the current Access Token meaning all access wil be denied if you are using it afterwards again."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

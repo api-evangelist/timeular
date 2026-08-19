@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Members API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Folder Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List all Folder Members"
+        },
+        {
+          "info": {
+            "name": "Add Member to Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id/members",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can add a new Member to an existing Folder. You should identify new Member by email and set their access level to \"full\" or \"personal\".\nTeam members with a subscription seat are immediately added to Folder.\nUsers without a subscription seat or without a EARLY account receive an invitation email and their \"id\" in response body has value \"pending\". They will appear with a Guest badge in the Members list."
+        },
+        {
+          "info": {
+            "name": "Find Folder Member by their ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "An endpoint to show information about Folder Member.\nYou can use GET users endpoint to find IDs of all of your team members.\nAccess level is \"full\" or \"personal\". Full access members can do things like create and edit activities and tags within a Folder. Personal access members are able to track time entries using the activities and tags that the Full access members have created. Learn more about access levels."
+        },
+        {
+          "info": {
+            "name": "Remove Member from Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/folders/:id/members/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "With this endpoint you can remove a Member from Folder. Member who was removed from Folder will be returned in retiredMembers response field in Folder endpoints. Removing a Member can take a few minutes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

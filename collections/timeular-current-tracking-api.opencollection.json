@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Current Tracking API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Current Tracking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Show current Tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/tracking"
+          },
+          "docs": "Show current Tracking"
+        },
+        {
+          "info": {
+            "name": "Edit Tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.early.app/api/v4/api/v4/tracking",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can set/edit/remove the note of your current Tracking.\nTo remove the note set it to null/empty/blank. You can provide one or more Tags and Mentions in a note, each of them prefixed with # or @. If the related activity is bound to some Integration, let’s say a JIRA Project, JIRA task IDs are valid Mentions too."
+        },
+        {
+          "info": {
+            "name": "Cancel Tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/tracking"
+          },
+          "docs": "With this endpoint you can cancel your current Tracking. New Time Entry won't be created."
+        },
+        {
+          "info": {
+            "name": "Start Tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/tracking/:id/start",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Start Tracking"
+        },
+        {
+          "info": {
+            "name": "Stop Tracking",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/tracking/stop",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can create a new Time Entry by stopping the current tracking. The resulting Time Entry should have a duration no shorter than 1 minute.\nThe time entry will be created even if it overlaps with other Time Entries – in result existing Time Entries will be split or deleted in such manner, that the new one will fit without overlapping."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

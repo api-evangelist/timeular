@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Webhooks API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/webhooks/event"
+          },
+          "docs": "Returns a list of events, which can be subscribed to."
+        },
+        {
+          "info": {
+            "name": "List Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/webhooks/subscription"
+          },
+          "docs": "Lists all webhook subscriptions for the current user."
+        },
+        {
+          "info": {
+            "name": "Subscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/webhooks/subscription",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a webhook subscription for the given event. That means that if the event happens (e.g. a time entry is created), the given target url will be called with the payload of the event.\nThe URL needs to be a valid, publicly reachable, HTTPS URL.\nThe webhook has a timeout of 10 seconds, so if it takes longer to call the given URL, it will fail.\nIf the given target URL returns a 410 GONE error, this webhook subscription will automatically be unsubscribed.\nSee the Webhooks description for further"
+        },
+        {
+          "info": {
+            "name": "Unsubscribe all for User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/webhooks/subscription"
+          },
+          "docs": "Removes all webhooks subscriptions for the current user."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/webhooks/subscription/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Removes a webhook subscription by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,115 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Time Entries API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Time Entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find Time Entries in given range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/time-entries/:timestamp/:timestamp",
+            "params": [
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Find Time Entries within the given time range."
+        },
+        {
+          "info": {
+            "name": "Create Time Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/time-entries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint, you can create a new Time Entry. It should be connected to an Activity and have a duration no shorter than 1 minute. A Note can be provided too, but it’s not required. Within this Note, you can refer one or more Tags or Mentions.\nThese Tags and Mentions need to be referenced by their ID and put inside a special prefix and suffix, &lt;{{|t|1|}}&gt; for the tag with id 1 and &lt;{{|m|1|}}&gt; for the mention with id 1.\nIf the related Activity is bound to some Integration, let’s"
+        },
+        {
+          "info": {
+            "name": "Find Time Entry by its ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/time-entries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Find Time Entry by its ID"
+        },
+        {
+          "info": {
+            "name": "Edit a Time Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.early.app/api/v4/api/v4/time-entries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "With this endpoint you can edit an existing time entry. When changing the activity ID please note, that both the new and old activity attached to time entry have to belong to same integration.\nTo remove a note, just set the complete object to null and all values within the object will be deleted too."
+        },
+        {
+          "info": {
+            "name": "Delete a Time Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/time-entries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Time Entry"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

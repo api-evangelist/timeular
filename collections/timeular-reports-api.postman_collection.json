@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "d28c05c6-d75f-44f8-914e-7814e0472800",
+      "name": "Reports",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5c96e53a-c270-407a-bf58-d7e1fcbf8ee0",
+          "name": "Generate Report",
+          "request": {
+            "name": "Generate Report",
+            "description": {
+              "content": "Generates a report which contains all the Time Entries from inside the given time range. If some Time Entry exceeds the report’s time range, only the matching part will be included.\nOnly Members with Full access can see Time Entries of other Members of a Folder.\nDue to midnight delay  Members with Full access are able to see all time entries created up until midnight in the time entry creator's time zone. You always see your own time entries without delay.\nWarning: For file type \"xlsx\" or \"csv\" you need a pro subscription!\nThere are 2 mandatory fields:\n\ndate\n\nstart - \"YYYY-MM-DD\", (e.g. 2024-07-01)\n\nend - \"YYYY-MM-DD\", (e.g. 2024-07-31)\n\n\n\nfileType (\"json\", \"xlsx\" or \"csv\" )\n\n\nAnd optional fields that allow you to filter the results:\n\nactivities\n\nids (e.g. [\"1\", \"2\"])\n\nstatus (\"active\" or \"archived\")\n\n\n\nusers\n\nids (e.g. [\"1\", \"2\"])\n\n\nfolders\n\nids (e.g. [\"1\", \"2\"])\n\nstatus (\"active\" or \"archived\")\n\n\n\ntags\n\nids (e.g. [1, 2])\n\n\nmentions\n\nids (e.g. [1, 2])\n\n\noperator (\"AND\" or \"OR\") - show Time Entries matching all (\"AND\") or any (\"OR\") provided Tags and Mentions, defaults to \"OR\"\n\nnoteQuery (e.g. \"text\")",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v4",
+                "report"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"date\": {\n    \"start\": \"2017-02-01\",\n    \"end\": \"2017-02-28\"\n  },\n  \"fileType\": \"json\",\n  \"activities\": {\n    \"ids\": [\n      \"1\"\n    ],\n    \"status\": \"active\"\n  },\n  \"users\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"folders\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"tags\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"mentions\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"operator\": \"OR\",\n  \"noteQuery\": \"text\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "33655f20-48a3-44df-9287-668b65dd7833",
+              "name": "Report in CSV format",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date\": {\n    \"start\": \"2017-02-01\",\n    \"end\": \"2017-02-28\"\n  },\n  \"fileType\": \"json\",\n  \"activities\": {\n    \"ids\": [\n      \"1\"\n    ],\n    \"status\": \"active\"\n  },\n  \"users\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"folders\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"tags\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"mentions\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"operator\": \"OR\",\n  \"noteQuery\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "99cdfe7f-26c4-408c-90d5-56a2f2cdae5d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date\": {\n    \"start\": \"2017-02-01\",\n    \"end\": \"2017-02-28\"\n  },\n  \"fileType\": \"json\",\n  \"activities\": {\n    \"ids\": [\n      \"1\"\n    ],\n    \"status\": \"active\"\n  },\n  \"users\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"folders\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"tags\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"mentions\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"operator\": \"OR\",\n  \"noteQuery\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Explanation of what has happened\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "855349fa-78c3-4823-ad34-2c4913a5954b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v4",
+                    "report"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"date\": {\n    \"start\": \"2017-02-01\",\n    \"end\": \"2017-02-28\"\n  },\n  \"fileType\": \"json\",\n  \"activities\": {\n    \"ids\": [\n      \"1\"\n    ],\n    \"status\": \"active\"\n  },\n  \"users\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"folders\": {\n    \"ids\": [\n      \"1\"\n    ]\n  },\n  \"tags\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"mentions\": {\n    \"ids\": [\n      1\n    ]\n  },\n  \"operator\": \"OR\",\n  \"noteQuery\": \"text\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Explanation of what has happened\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.early.app/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "35813b90-9fc6-4aa7-b736-9dc7a99ec5cd",
+    "name": "EARLY (Timeular) Public Activities Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Public REST API for EARLY (formerly Timeular) time tracking. Manage activities, time entries, live tracking, tags & mentions, folders, users, leaves, and webhook subscriptions. Authentication is via API Key + API Secret exchanged for a Bearer Access Token. Derived by API Evangelist from the provider-published public Postman collection.\n\nContact Support:\n Name: EARLY Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

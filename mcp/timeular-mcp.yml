@@ -2,10 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/timeular-early-openapi.yml
-summary: >-
-  No official hosted/remote MCP server was found for EARLY (Timeular). This is a
-  candidate tool list derived one-to-one from the documented V4 REST operations, to
-  seed an MCP server that wraps the EARLY Public API.
+summary: No official hosted/remote MCP server was found for EARLY (Timeular). This is a candidate tool
+  list derived one-to-one from the documented V4 REST operations, to seed an MCP server that wraps the
+  EARLY Public API.
 server:
   name: timeular-early
   transport: http
@@ -53,3 +52,9 @@ tools:
 - name: subscribe_webhook
   description: Subscribe a target URL to a webhook event
   source_operation: openapi/timeular-early-openapi.yml#subscribe
+deployment:
+  mode: none
+  verified: derived
+  tools: 14
+  checked: '2026-08-12'
+  source: catalog MCP census

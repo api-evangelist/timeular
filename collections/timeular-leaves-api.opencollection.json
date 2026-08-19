@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Leaves API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leaves",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all Leaves",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/leaves"
+          },
+          "docs": "With this endpoint you can list all your Leaves. If you are Admin or Owner you can list Leaves of all your Team members or just one of them using userId param."
+        },
+        {
+          "info": {
+            "name": "Create a Leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/leaves",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a Leave for yourself. If the Leave exceeds working hours for that day, it will be expanded into a full-day leave.\nTo create a Leave on behalf of a Team member use Create a Leave for User endpoint instead.\ntypeId, startDate and endDate fields are required.\nnote field is optional."
+        },
+        {
+          "info": {
+            "name": "List all Leave Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/leaves/types"
+          },
+          "docs": "With this endpoint you can list Leave types. Other Leave requests use typeId to indicate their type."
+        },
+        {
+          "info": {
+            "name": "Create a Leave for User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/users/:id/leaves",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an approved Leave on behalf of a Team member. Requires Admin or Owner role.\nIf the Leave exceeds Team member's working hours for that day, it will be expanded into a full-day leave.\ntypeId, startDate and endDate fields are required.\nnote field is optional."
+        },
+        {
+          "info": {
+            "name": "Approve a Leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/leaves/:id/approve",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Approve a Leave of Team member. Requires Admin or Owner role.\nFuture Leave can be approved regardless of its status, so it's possible to change status of a future Leave from denied to approved using this endpoint. Only pending past Leave can be approved."
+        },
+        {
+          "info": {
+            "name": "Deny a Leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/leaves/:id/deny",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deny a Leave of Team member. Requires Admin or Owner role.\nFuture Leave can be denied regardless of its status, so it's possible to change status of a future Leave from approved to denied using this endpoint. Only pending past Leave can be denied."
+        },
+        {
+          "info": {
+            "name": "Delete a Leave",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/leaves/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a Leave. If it's a Leave of another Team member, action requires Admin or Owner role.\nThis is an irreversible action. If you want to deny a Leave use Deny a Leave endpoint instead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

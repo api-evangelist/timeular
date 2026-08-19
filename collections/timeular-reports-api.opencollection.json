@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Reports API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/report",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generates a report which contains all the Time Entries from inside the given time range. If some Time Entry exceeds the report’s time range, only the matching part will be included.\nOnly Members with Full access can see Time Entries of other Members of a Folder.\nDue to midnight delay  Members with Full access are able to see all time entries created up until midnight in the time entry creator's time zone. You always see your own time entries without delay.\nWarning: For file type \"xlsx\" or \"csv\" "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

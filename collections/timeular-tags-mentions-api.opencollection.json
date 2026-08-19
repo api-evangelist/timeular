@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "EARLY (Timeular) Public Activities Tags & Mentions API",
+    "version": "v4"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tags & Mentions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch Tags & Mentions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.early.app/api/v4/api/v4/tags-and-mentions"
+          },
+          "docs": "Fetches all Tags and Mentions, including from third party integrations, such as JIRA, Toggl etc."
+        },
+        {
+          "info": {
+            "name": "Create Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/tags",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Tag within the given Folder and scope (timeular is default)."
+        },
+        {
+          "info": {
+            "name": "Update Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.early.app/api/v4/api/v4/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Tag"
+        },
+        {
+          "info": {
+            "name": "Delete Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the given tag, returning the list of timeEntries, which were edited by this operation, as well as if the currentTracking was edited by deleting the tag."
+        },
+        {
+          "info": {
+            "name": "Create Mention",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.early.app/api/v4/api/v4/mentions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a Mention within the given Folder and scope (timeular is default)."
+        },
+        {
+          "info": {
+            "name": "Update Mention",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.early.app/api/v4/api/v4/mentions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update Mention"
+        },
+        {
+          "info": {
+            "name": "Delete Mention",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.early.app/api/v4/api/v4/mentions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the given mention, returning the list of timeEntries, which were edited by this operation, as well as if the currentTracking was edited by deleting the mention."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
