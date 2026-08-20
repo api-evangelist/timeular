@@ -40,6 +40,15 @@ tags:
 - Time Management
 - Reporting
 - Team Management
+- Webhook
+- Software-as-a-Service
+tags_raw:
+- Company
+- Time Tracking
+- Productivity
+- Time Management
+- Reporting
+- Team Management
 - Webhooks
 - SaaS
 apis:
@@ -319,6 +328,8 @@ apis:
   humanURL: https://developers.early.app/
   baseURL: https://api.early.app/api/v4
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -349,6 +360,8 @@ apis:
   humanURL: https://developers.early.app/
   baseURL: https://api.early.app/api/v4
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
