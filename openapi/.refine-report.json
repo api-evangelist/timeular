@@ -29,6 +29,19 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "timeular-activities-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-authentication-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-current-tracking-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-folders-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-leaves-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-members-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-reports-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-tags-mentions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-time-entries-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "timeular-webhooks-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
