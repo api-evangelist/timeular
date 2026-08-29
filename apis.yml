@@ -11,6 +11,18 @@ description: >-
   The API is versioned in the URI path (V4 is current; V3 and V2 remain available)
   and is published as a public Postman collection. Timeular is backed by Speedinvest.
 url: https://raw.githubusercontent.com/api-evangelist/timeular/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
