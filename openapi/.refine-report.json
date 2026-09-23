@@ -1,17 +1,7 @@
 {
   "provider": "timeular",
   "sources": [
-    "timeular-activities-api-openapi.yml",
-    "timeular-authentication-api-openapi.yml",
-    "timeular-current-tracking-api-openapi.yml",
-    "timeular-folders-api-openapi.yml",
-    "timeular-leaves-api-openapi.yml",
-    "timeular-members-api-openapi.yml",
-    "timeular-reports-api-openapi.yml",
-    "timeular-tags-mentions-api-openapi.yml",
-    "timeular-time-entries-api-openapi.yml",
-    "timeular-users-api-openapi.yml",
-    "timeular-webhooks-api-openapi.yml"
+    "_ae-authored/timeular-early-openapi.yml"
   ],
   "outputs": [
     "timeular-activities-api-openapi.yml",
@@ -30,18 +20,21 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "timeular-activities-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-authentication-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-current-tracking-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-folders-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-leaves-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-members-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-reports-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-tags-mentions-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-time-entries-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-users-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "timeular-webhooks-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "timeular-early-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "timeular-activities-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-current-tracking-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-folders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-leaves-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-members-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-tags-mentions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-time-entries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "timeular-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
