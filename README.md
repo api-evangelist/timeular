@@ -64,6 +64,153 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Timeular is a company surfaced as a portfolio company of speedinvest and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Timeular (now branded EARLY) is a time-tracking company whose apps and physical tracking device help individuals and teams capture where their time goes. Its public REST API — hosted at api.early.app — lets developers manage activities, start and stop live tracking, create and query time entries over date ranges, generate reports, organize tags and mentions, administer folders, users and leave, and subscribe to webhooks for time-tracking and leave events. Authentication uses an API Key and API Secret exchanged for a short-lived Bearer Access Token. The API is versioned in the URI path (V4 is current; V3 and V2 remain available) and is published as a public Postman collection. Timeular is backed by Speedinvest.
 
-Backed by: speedinvest
+**Areas:** Company · Time Tracking · Productivity · Time Management · Reporting · Team Management · Webhook · Software-as-a-Service
+
+## Timeular on APIs.io
+
+Everything profiled for Timeular is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/timeular/](https://apis.io/providers/timeular/)** — or go straight to one of the APIs or properties below.
+
+### APIs (11)
+
+- [Timeular Activities API](https://apis.io/apis/timeular/timeular-activities-api/) — The Activities API from Timeular — 3 operation(s) for activities.
+- [Timeular Authentication API](https://apis.io/apis/timeular/timeular-authentication-api/) — The Authentication API from Timeular — 3 operation(s) for authentication.
+- [Timeular Current Tracking API](https://apis.io/apis/timeular/timeular-current-tracking-api/) — The Current Tracking API from Timeular — 3 operation(s) for current tracking.
+- [Timeular Folders API](https://apis.io/apis/timeular/timeular-folders-api/) — The Folders API from Timeular — 4 operation(s) for folders.
+- [Timeular Leaves API](https://apis.io/apis/timeular/timeular-leaves-api/) — The Leaves API from Timeular — 6 operation(s) for leaves.
+- [Timeular Members API](https://apis.io/apis/timeular/timeular-members-api/) — The Members API from Timeular — 2 operation(s) for members.
+- [Timeular Reports API](https://apis.io/apis/timeular/timeular-reports-api/) — The Reports API from Timeular — 1 operation(s) for reports.
+- [Timeular Tags & Mentions API](https://apis.io/apis/timeular/timeular-tags-mentions-api/) — The Tags & Mentions API from Timeular — 5 operation(s) for tags & mentions.
+- [Timeular Time Entries API](https://apis.io/apis/timeular/timeular-time-entries-api/) — The Time Entries API from Timeular — 3 operation(s) for time entries.
+- [Timeular Users API](https://apis.io/apis/timeular/timeular-users-api/) — The Users API from Timeular — 2 operation(s) for users.
+- [Timeular Webhooks API](https://apis.io/apis/timeular/timeular-webhooks-api/) — The Webhooks API from Timeular — 3 operation(s) for webhooks.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [EARLY (Timeular) Webhooks](https://apis.io/asyncapis/timeular/timeular-early-asyncapi/)
+
+#### Event channels (5)
+
+Individual events and webhooks the provider emits.
+
+- [activity](https://apis.io/channels/timeular/activity/)
+- [folder](https://apis.io/channels/timeular/folder/)
+- [timeEntry](https://apis.io/channels/timeular/timeentry/)
+- [timeLeave](https://apis.io/channels/timeular/timeleave/)
+- [tracking](https://apis.io/channels/timeular/tracking/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [timeular-early](https://apis.io/servers/timeular/timeular-early/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Timeular Agentic Access](https://apis.io/agentic-access/timeular/timeular-agentic-access/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [EARLY (Timeular) Public Activities API](https://apis.io/collections/timeular/open-timeular-activities-api/)
+- [EARLY (Timeular) Public Activities Authentication API](https://apis.io/collections/timeular/open-timeular-authentication-api/)
+- [EARLY (Timeular) Public Activities Current Tracking API](https://apis.io/collections/timeular/open-timeular-current-tracking-api/)
+- [EARLY (Timeular) Public Activities Folders API](https://apis.io/collections/timeular/open-timeular-folders-api/)
+- [EARLY (Timeular) Public Activities Leaves API](https://apis.io/collections/timeular/open-timeular-leaves-api/)
+- [EARLY (Timeular) Public Activities Members API](https://apis.io/collections/timeular/open-timeular-members-api/)
+- [EARLY (Timeular) Public Activities Reports API](https://apis.io/collections/timeular/open-timeular-reports-api/)
+- [EARLY (Timeular) Public Activities Tags & Mentions API](https://apis.io/collections/timeular/open-timeular-tags-mentions-api/)
+- [EARLY (Timeular) Public Activities Time Entries API](https://apis.io/collections/timeular/open-timeular-time-entries-api/)
+- [EARLY (Timeular) Public Activities Users API](https://apis.io/collections/timeular/open-timeular-users-api/)
+- [EARLY (Timeular) Public Activities Webhooks API](https://apis.io/collections/timeular/open-timeular-webhooks-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Timeular Early Overlay](https://apis.io/overlays/timeular/timeular-early-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Timeular Authentication](https://apis.io/security/timeular/timeular-authentication/)
+- [Timeular Domain Security](https://apis.io/security/timeular/timeular-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://early.app/)
+- [Documentation](https://developers.early.app/)
+- [Getting started](https://developers.early.app/)
+- [API reference](https://developers.early.app/)
+- [Pricing](https://early.app/pricing/)
+- [Sign up](https://product.early.app/register)
+- [Support](https://support.early.app/en/)
+- [Blog](https://early.app/blog/)
+- [Privacy policy](https://early.app/privacy-policy/)
+- [GitHub](https://github.com/timeular)
+
+## API Evangelist rating
+
+**Kin Score 34.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 78.6 |
+| Contract quality | 24.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 63.7 |
+| Access clarity | 27.6 |
+
+**Agent readiness 26.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | — |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.6** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/timeular/](https://apis.io/providers/timeular/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Timeular: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/timeular/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
